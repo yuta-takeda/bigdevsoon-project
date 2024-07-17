@@ -1,16 +1,14 @@
-import React, { useState } from "react";
-import { Component } from "./component";
+import React, { useState } from 'react'
+import { Component } from './component'
 
-type Icon = "X" | "O";
+type Icon = 'X' | 'O'
 
 export const Container: React.FC = () => {
-  const [userIcon, setUserIcon] = useState<Icon>("X");
+  const [userIcon, setUserIcon] = useState<Icon>('X')
 
-  const handleSetUserIcon = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUserIcon(event.target.value as Icon);
-  };
+  const handleSetUserIcon = (event: React.ChangeEvent) => {
+    setUserIcon(event.target.value as Icon)
+  }
 
-  return (
-    <Component userIcon={userIcon} handleSetUserIcon={handleSetUserIcon} />
-  );
-};
+  return <Component userIcon={userIcon} handleSetUserIcon={handleSetUserIcon} />
+}

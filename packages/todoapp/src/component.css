@@ -6,8 +6,7 @@
   --todo-bg-color: #ffffff;
   --border-color: #93a9ff;
   --button-color: #93a9ff;
-  --svg-filter: invert(83%) sepia(49%) saturate(1%) hue-rotate(346deg)
-    brightness(100%) contrast(104%);
+  --svg-filter: invert(83%) sepia(49%) saturate(1%) hue-rotate(346deg) brightness(100%) contrast(104%);
 }
 
 :root.darkmode {
@@ -18,13 +17,12 @@
   --todo-bg-color: #25273c;
   --border-color: #93a9ff;
   --button-color: #93a9ff;
-  --svg-filter: invert(2%) sepia(2%) saturate(772%) hue-rotate(315deg)
-    brightness(98%) contrast(90%);
+  --svg-filter: invert(2%) sepia(2%) saturate(772%) hue-rotate(315deg) brightness(98%) contrast(90%);
 }
 
 @font-face {
-  font-family: "Kanit";
-  src: url("./assets/fonts/Kanit-Regular.ttf") format("ttf");
+  font-family: 'Kanit';
+  src: url('./assets/fonts/Kanit-Regular.ttf') format('ttf');
 }
 
 svg {
@@ -33,7 +31,7 @@ svg {
 
 body {
   background-color: var(--bg-color);
-  background-image: url("./assets/background.png");
+  background-image: url('./assets/background.png');
   background-repeat: no-repeat;
   background-size: 100vw 25vh;
   background-position: center top;
@@ -57,7 +55,7 @@ body {
 }
 
 .title {
-  font-family: "Kanit";
+  font-family: 'Kanit';
   font-style: normal;
   font-weight: 500;
   font-size: 48px;

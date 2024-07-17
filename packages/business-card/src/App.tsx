@@ -1,8 +1,7 @@
-import React from "react";
-import userPhoto from "./assets/images/user-photo.jpg";
-import githubIcon from "./assets/icons/github-icon.svg";
-import linkedinIcon from "./assets/icons/linkedin-icon.svg";
-import twitterIcon from "./assets/icons/twitter-icon.svg";
+import githubIcon from './assets/icons/github-icon.svg'
+import linkedinIcon from './assets/icons/linkedin-icon.svg'
+import twitterIcon from './assets/icons/twitter-icon.svg'
+import userPhoto from './assets/images/user-photo.jpg'
 
 function App() {
   return (
@@ -13,13 +12,9 @@ function App() {
             <div className="relative p-8 mb-8 grow-[3] w-[300px]">
               <div className="absolute bottom-0">
                 <dl>
-                  <dt className="font-semibold before:mr-2 before:content-email">
-                    Email
-                  </dt>
+                  <dt className="font-semibold before:mr-2 before:content-email">Email</dt>
                   <dd>zac.patrick@mail.com</dd>
-                  <dt className="mt-4 font-semibold before:mr-2 before:content-phone">
-                    Phone
-                  </dt>
+                  <dt className="mt-4 font-semibold before:mr-2 before:content-phone">Phone</dt>
                   <dd>(+33) 6 32 43 1290</dd>
                 </dl>
               </div>
@@ -56,12 +51,7 @@ function App() {
           </div>
           <div className="relative w-[250px]">
             <div className="absolute z-10 w-[300px] h-[500px] left-[-70px] top-[40px]">
-              <img
-                src={userPhoto}
-                width={805}
-                height={1006}
-                className="object-cover w-[300px] h-[500px]"
-              />
+              <img src={userPhoto} width={805} height={1006} className="object-cover w-[300px] h-[500px]" />
             </div>
             <div className="absolute z-20 w-8 h-8 slate-gradation-animation top-[100px] left-[-90px]"></div>
             <div className="absolute z-20 w-8 h-8 slate-gradation-animation top-[70px] left-[210px]"></div>
@@ -78,10 +68,8 @@ function App() {
             <div className="mt-8">
               <p className="font-bold">Front-end Developer • San Francisco</p>
               <p className="mt-4">
-                High accomplishment and user-focused Front-end Developer adept
-                in collaborating with UX and design teams to plan the technical
-                writing and execution of functional specifications for websites
-                and applications.
+                High accomplishment and user-focused Front-end Developer adept in collaborating with UX and design teams
+                to plan the technical writing and execution of functional specifications for websites and applications.
               </p>
             </div>
             <div className="mt-4">
@@ -97,7 +85,7 @@ function App() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

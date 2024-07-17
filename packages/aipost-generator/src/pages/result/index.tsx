@@ -1,1 +1,1 @@
-export { Container as ResultPage } from "./container";
+export { Container as ResultPage } from './container'

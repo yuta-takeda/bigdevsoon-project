@@ -1,56 +1,43 @@
-import React, { useState } from "react";
-import { Component } from "./component";
+import React, { useState } from 'react'
+import { Component } from './component'
 
 export interface SocialPlatform {
-  name: string;
-  icon: string;
+  name: string
+  icon: string
 }
 
 const socialPlatforms = [
   {
-    name: "Facebook",
-    icon: "https://img.icons8.com/ios-filled/50/000000/facebook-new.png",
+    name: 'Facebook',
+    icon: 'https://img.icons8.com/ios-filled/50/000000/facebook-new.png',
   },
   {
-    name: "Twitter",
-    icon: "https://img.icons8.com/ios-filled/50/000000/twitter.png",
+    name: 'Twitter',
+    icon: 'https://img.icons8.com/ios-filled/50/000000/twitter.png',
   },
   {
-    name: "Reddit",
-    icon: "https://img.icons8.com/ios-filled/50/000000/reddit.png",
+    name: 'Reddit',
+    icon: 'https://img.icons8.com/ios-filled/50/000000/reddit.png',
   },
   {
-    name: "LinkedIn",
-    icon: "https://img.icons8.com/ios-filled/50/000000/linkedin.png",
+    name: 'LinkedIn',
+    icon: 'https://img.icons8.com/ios-filled/50/000000/linkedin.png',
   },
-] as SocialPlatform[];
+] as SocialPlatform[]
 
-const maxMessageLength = 200;
-const toneOfVoices = [
-  "Polite",
-  "Funny",
-  "Friendly",
-  "Informal",
-  "Serious",
-  "Optimistic",
-  "Motivational",
-];
-const postStyles = ["Work", "Opinion", "Case study", "Story", "Tutorial"];
+const maxMessageLength = 200
+const toneOfVoices = ['Polite', 'Funny', 'Friendly', 'Informal', 'Serious', 'Optimistic', 'Motivational']
+const postStyles = ['Work', 'Opinion', 'Case study', 'Story', 'Tutorial']
 
 export const Container: React.FC = () => {
-  const [selectedPlatform, setSelectedPlatform] = useState<string>("");
-  const [message, setMessage] = useState<string>("");
-  const [selectedToneOfVoice, setSelectedToneOfVoice] = useState<string>("");
-  const [selectedPostStyle, setSelectedPostStyle] = useState<string>("");
+  const [selectedPlatform, setSelectedPlatform] = useState<string>('')
+  const [message, setMessage] = useState<string>('')
+  const [selectedToneOfVoice, setSelectedToneOfVoice] = useState<string>('')
+  const [selectedPostStyle, setSelectedPostStyle] = useState<string>('')
 
   const isPostable = (): boolean => {
-    return !!(
-      selectedPlatform &&
-      message &&
-      selectedToneOfVoice &&
-      selectedPostStyle
-    );
-  };
+    return !!(selectedPlatform && message && selectedToneOfVoice && selectedPostStyle)
+  }
 
   return (
     <Component
@@ -68,5 +55,5 @@ export const Container: React.FC = () => {
       selectedPostStyle={selectedPostStyle}
       isPostable={isPostable}
     />
-  );
-};
+  )
+}

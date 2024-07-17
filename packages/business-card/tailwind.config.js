@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{html,js,ts,jsx,tsx}"],
+  content: ['./src/**/*.{html,js,ts,jsx,tsx}'],
   theme: {
     extend: {
       content: {
@@ -9,24 +9,24 @@ module.exports = {
       },
     },
     fontFamily: {
-      poppins: ["Poppins", "sans-serif"],
+      poppins: ['Poppins', 'sans-serif'],
     },
     keyframes: {
       gradation: {
-        "0%": {
-          backgroundPosition: "0% 50%",
+        '0%': {
+          backgroundPosition: '0% 50%',
         },
-        "50%": {
-          backgroundPosition: "100% 50%",
+        '50%': {
+          backgroundPosition: '100% 50%',
         },
-        "100%": {
-          backgroundPosition: "0% 50%",
+        '100%': {
+          backgroundPosition: '0% 50%',
         },
       },
     },
     animation: {
-      gradation: "gradation 5s ease infinite",
+      gradation: 'gradation 5s ease infinite',
     },
   },
   plugins: [],
-};
+}

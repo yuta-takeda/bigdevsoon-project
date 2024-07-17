@@ -1,6 +1,6 @@
-import React from "react";
-import logo from "./assets/logo.svg";
-import { Link } from "react-router-dom";
+import React from 'react'
+import { Link } from 'react-router-dom'
+import logo from './assets/logo.svg'
 
 export const HomeComponent: React.FC = () => {
   return (
@@ -12,12 +12,9 @@ export const HomeComponent: React.FC = () => {
         <br />
         the timeless joy of this classic game!
       </h2>
-      <Link
-        className="py-2 px-32 m-4 rounded-3xl bg-sky-300 hover:bg-sky-200"
-        to={"/new_game"}
-      >
+      <Link className="py-2 px-32 m-4 rounded-3xl bg-sky-300 hover:bg-sky-200" to={'/new_game'}>
         New Game
       </Link>
     </>
-  );
-};
+  )
+}

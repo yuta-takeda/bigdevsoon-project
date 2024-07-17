@@ -1,24 +1,24 @@
-import React from "react";
-import type { SocialPlatform } from "./container";
-import { Link } from "react-router-dom";
+import React from 'react'
+import { Link } from 'react-router-dom'
+import type { SocialPlatform } from './container'
 
 interface Props {
-  socialPlatforms: SocialPlatform[];
-  maxMessageLength: number;
-  toneOfVoices: string[];
-  postStyles: string[];
-  setSelectedPlatform: (platform: string) => void;
-  selectedPlatform: string;
-  setMessage: (message: string) => void;
-  message: string;
-  setSelectedToneOfVoice: (tone: string) => void;
-  selectedToneOfVoice: string;
-  setSelectedPostStyle: (style: string) => void;
-  selectedPostStyle: string;
-  isPostable: () => boolean;
+  socialPlatforms: SocialPlatform[]
+  maxMessageLength: number
+  toneOfVoices: string[]
+  postStyles: string[]
+  setSelectedPlatform: (platform: string) => void
+  selectedPlatform: string
+  setMessage: (message: string) => void
+  message: string
+  setSelectedToneOfVoice: (tone: string) => void
+  selectedToneOfVoice: string
+  setSelectedPostStyle: (style: string) => void
+  selectedPostStyle: string
+  isPostable: () => boolean
 }
 
-export const Component: React.FC<Props> = (props) => {
+export const Component: React.FC = (props) => {
   const {
     socialPlatforms,
     maxMessageLength,
@@ -33,14 +33,12 @@ export const Component: React.FC<Props> = (props) => {
     setSelectedPostStyle,
     selectedPostStyle,
     isPostable,
-  } = props;
+  } = props
 
   return (
     <div className="flex flex-col items-center justify-content">
       <div className="p-8 w-full max-w-screen-md bg-white rounded-lg shadow-md">
-        <h1 className="mb-6 text-2xl font-bold text-center">
-          Generate your post
-        </h1>
+        <h1 className="mb-6 text-2xl font-bold text-center">Generate your post</h1>
         <div className="mb-4">
           <div className="mb-2 font-bold text-gray-700">Social platform</div>
           <div className="flex space-x-3">
@@ -59,13 +57,13 @@ export const Component: React.FC<Props> = (props) => {
                     width={32}
                     style={{
                       filter:
-                        selectedPlatform === platform.name
-                          ? "invert(17%) sepia(91%) saturate(7085%) hue-rotate(128deg) brightness(100%) contrast(106%)"
-                          : "",
+                        selectedPlatform === platform.name ?
+                          'invert(17%) sepia(91%) saturate(7085%) hue-rotate(128deg) brightness(100%) contrast(106%)'
+                        : '',
                     }}
                   />
                 </button>
-              );
+              )
             })}
           </div>
         </div>
@@ -93,14 +91,14 @@ export const Component: React.FC<Props> = (props) => {
             {toneOfVoices.map((tone) => {
               return (
                 <button
-                  className={`py-2 px-4 text-sm rounded-full border ${selectedToneOfVoice === tone ? "bg-blue-200" : "bg-white hover:bg-gray-200"}`}
+                  className={`py-2 px-4 text-sm rounded-full border ${selectedToneOfVoice === tone ? 'bg-blue-200' : 'bg-white hover:bg-gray-200'}`}
                   key={tone}
                   onClick={() => setSelectedToneOfVoice(tone)}
                   type="button"
                 >
                   {tone}
                 </button>
-              );
+              )
             })}
           </div>
         </div>
@@ -110,26 +108,26 @@ export const Component: React.FC<Props> = (props) => {
             {postStyles.map((style) => {
               return (
                 <button
-                  className={`py-2 px-4 text-sm rounded-full border ${selectedPostStyle === style ? "bg-blue-200" : "bg-white hover:bg-gray-200"}`}
+                  className={`py-2 px-4 text-sm rounded-full border ${selectedPostStyle === style ? 'bg-blue-200' : 'bg-white hover:bg-gray-200'}`}
                   key={style}
                   onClick={() => setSelectedPostStyle(style)}
                   type="button"
                 >
                   {style}
                 </button>
-              );
+              )
             })}
           </div>
         </div>
         <div className="mt-12 text-center">
           <Link
             to={{
-              pathname: "/result",
+              pathname: '/result',
               search: `?platform=${selectedPlatform}&message=${message}&tone=${selectedToneOfVoice}&style=${selectedPostStyle}`,
             }}
           >
             <button
-              className={`py-2 w-full text-white rounded-full ${isPostable() ? "bg-blue-600 hover:bg-blue-700" : "bg-gray-300"}`}
+              className={`py-2 w-full text-white rounded-full ${isPostable() ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-300'}`}
               disabled={!isPostable()}
               type="button"
             >
@@ -139,11 +137,8 @@ export const Component: React.FC<Props> = (props) => {
         </div>
       </div>
       {!process.env.REACT_APP_OPENAI_API_KEY && (
-        <footer className="mt-4">
-          env REACT_APP_OPENAI_API_KEY is not set. So this app is running in
-          demo mode.
-        </footer>
+        <footer className="mt-4">env REACT_APP_OPENAI_API_KEY is not set. So this app is running in demo mode.</footer>
       )}
     </div>
-  );
-};
+  )
+}
