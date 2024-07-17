@@ -18,7 +18,7 @@ interface Props {
   isPostable: () => boolean
 }
 
-export const Component: React.FC = (props) => {
+export const Component: React.FC<Props> = (props) => {
   const {
     socialPlatforms,
     maxMessageLength,

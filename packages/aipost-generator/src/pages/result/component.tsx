@@ -8,7 +8,7 @@ interface Props {
   handleCopyText: () => void
 }
 
-export const Component: React.FC = (props) => {
+export const Component: React.FC<Props> = (props) => {
   const { generatedMessage, handleRegenerate, handleCopyText } = props
 
   return (

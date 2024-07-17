@@ -4,7 +4,7 @@ interface Props {
   text: string
 }
 
-export const TypingText: React.FC = (props) => {
+export const TypingText: React.FC<Props> = (props) => {
   const { text } = props
   const [typingText, setTypingText] = useState<string>('')
   useEffect(() => {
@@ -15,7 +15,6 @@ export const TypingText: React.FC = (props) => {
     setTypingText('')
     const textItr = text[Symbol.iterator]()
     let timerId: NodeJS.Timeout
-
     ;(function typeText() {
       const nextChar = textItr.next()
       console.log(nextChar)

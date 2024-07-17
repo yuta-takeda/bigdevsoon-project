@@ -5,10 +5,10 @@ import xIcon from '../../assets/x.svg'
 
 interface Props {
   userIcon: 'X' | 'O'
-  handleSetUserIcon: (event: React.ChangeEvent) => void
+  handleSetUserIcon: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-export const Component: React.FC = (props) => {
+export const Component: React.FC<Props> = (props) => {
   const { userIcon, handleSetUserIcon } = props
 
   return (

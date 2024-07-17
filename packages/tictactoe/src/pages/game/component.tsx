@@ -26,7 +26,7 @@ const modalStyles = {
   },
 }
 
-export const Component: React.FC = (props) => {
+export const Component: React.FC<Props> = (props) => {
   const { yourIcon, currentPlayer, yourCount, cpuCount, handlePlace, field, isGameOver, isDraw } = props
 
   return (

@@ -19,7 +19,7 @@ interface TodoProps {
   deleteTodo: (e: MouseEvent, id: number) => void
 }
 
-export const TodoComponent: React.FC = ({
+export const TodoComponent: React.FC<TodoProps> = ({
   todos,
   isDarkMode,
   toggleTheme,
