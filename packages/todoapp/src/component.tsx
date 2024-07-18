@@ -75,6 +75,7 @@ export const TodoComponent: React.FC<TodoProps> = ({
                     className="deleteTodo"
                     height="24"
                     width="24"
+                    alt="delete-todo"
                     onClick={(e) => deleteTodo(e, todo.id)}
                   />
                 </div>

@@ -42,6 +42,7 @@ export const Container: React.FC = () => {
       )
       setGeneratedMessage(response.data.choices[0].message.content)
     })()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [generatedMessage])
 
   const handleRegenerate = () => {

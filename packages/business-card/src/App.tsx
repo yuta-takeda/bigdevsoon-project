@@ -28,7 +28,7 @@ function App() {
                   target="_blank"
                   rel="noreferrer noopener"
                 >
-                  <img src={githubIcon} />
+                  <img src={githubIcon} alt="github-icon" />
                 </a>
                 <a
                   href="https://linkedin.com/"
@@ -36,7 +36,7 @@ function App() {
                   target="_blank"
                   rel="noreferrer noopener"
                 >
-                  <img src={linkedinIcon} />
+                  <img src={linkedinIcon} alt="linkedin-icon" />
                 </a>
                 <a
                   href="https://x.com/"
@@ -44,14 +44,20 @@ function App() {
                   target="_blank"
                   rel="noreferrer noopener"
                 >
-                  <img src={twitterIcon} />
+                  <img src={twitterIcon} alt="twitter-icon" />
                 </a>
               </div>
             </div>
           </div>
           <div className="relative w-[250px]">
             <div className="absolute z-10 w-[300px] h-[500px] left-[-70px] top-[40px]">
-              <img src={userPhoto} width={805} height={1006} className="object-cover w-[300px] h-[500px]" />
+              <img
+                src={userPhoto}
+                width={805}
+                height={1006}
+                className="object-cover w-[300px] h-[500px]"
+                alt="main-image"
+              />
             </div>
             <div className="absolute z-20 w-8 h-8 slate-gradation-animation top-[100px] left-[-90px]"></div>
             <div className="absolute z-20 w-8 h-8 slate-gradation-animation top-[70px] left-[210px]"></div>

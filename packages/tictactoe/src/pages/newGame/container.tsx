@@ -7,7 +7,6 @@ export const Container: React.FC = () => {
   const [userIcon, setUserIcon] = useState<Icon>('X')
 
   const handleSetUserIcon = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const target = event.target as HTMLInputElement
     setUserIcon(event.target.value as Icon)
   }
 

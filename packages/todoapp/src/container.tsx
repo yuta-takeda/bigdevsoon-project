@@ -19,7 +19,7 @@ export const TodoContainer: React.FC = () => {
     }
 
     const value = input.value
-    if (value == '') {
+    if (value === '') {
       alert('Please enter a value')
       return
     }
