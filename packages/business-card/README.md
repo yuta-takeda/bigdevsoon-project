@@ -4,7 +4,7 @@ https://app.bigdevsoon.me/projects/business-card/cards
 
 ## Preview
 
-https://bigdevsoon-business-card.vercel.app/
+https://bigdevsoon-business-card.pages.dev/
 
 ## Technology Stack
 

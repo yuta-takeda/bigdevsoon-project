@@ -1,10 +1,10 @@
 # BigDevSoon AI Post Generator
 
-https://app.bigdevsoon.me/projects/ai-post-generator-7603be27-6da3-4b13-8f4f-974d7f395e08
+https://app.bigdevsoon.me/projects/ai-post-generator/cards
 
 ## Preview
 
-https://bigdevsoon-aipost-generator.vercel.app/
+https://bigdevsoon-aipost-generator.pages.dev/
 
 ## Technology Stack
 

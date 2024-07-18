@@ -1,10 +1,10 @@
 # BigDevSoon Tic Tac Toe
 
-https://app.bigdevsoon.me/projects/tic-tac-toe-a52cf42f-488f-42cf-8660-e0aaf3d2d221
+https://app.bigdevsoon.me/projects/tic-tac-toe/cards
 
 ## Preview
 
-https://bigdevsoon-tictactoe.vercel.app/
+https://bigdevsoon-tictactoe.pages.dev/
 
 ## Technology Stack
 
