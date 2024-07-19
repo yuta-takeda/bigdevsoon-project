@@ -65,6 +65,7 @@ export const TodoComponent: React.FC<TodoProps> = ({
                   onMouseEnter={(e) => showDeleteButton(e)}
                   onMouseLeave={(e) => hideDeleteButton(e)}
                   onClick={() => toggleCompleted(todo.id)}
+                  aria-label="todo"
                 >
                   <div className="todoLabel">
                     <input type="checkbox" checked={todo.completed} />
