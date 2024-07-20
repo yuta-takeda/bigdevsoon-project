@@ -35,7 +35,7 @@ export const TodoComponent: React.FC<TodoProps> = ({
     <div className="App">
       <div className="header">
         <div className="title">TODO</div>
-        <div className="toggle" onClick={() => toggleTheme()}>
+        <div className="toggle" onClick={() => toggleTheme()} role="button" aria-label="toggle-theme">
           <img src={isDarkMode ? lightModeIcon : darkModeIcon} alt={'モード切替'} />
         </div>
       </div>
@@ -68,7 +68,7 @@ export const TodoComponent: React.FC<TodoProps> = ({
                   aria-label="todo"
                 >
                   <div className="todoLabel">
-                    <input type="checkbox" checked={todo.completed} />
+                    <input type="checkbox" checked={todo.completed} readOnly />
                     <div className={todo.completed ? 'todoTextCompleted' : 'todoText'}>{todo.text}</div>
                   </div>
                   <img
@@ -77,6 +77,8 @@ export const TodoComponent: React.FC<TodoProps> = ({
                     height="24"
                     width="24"
                     alt="delete-todo"
+                    aria-label="delete-todo"
+                    role="button"
                     onClick={(e) => deleteTodo(e, todo.id)}
                   />
                 </div>
