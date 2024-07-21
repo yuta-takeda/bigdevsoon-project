@@ -7,8 +7,29 @@ import heroSecFoodSlide1 from './assets/images/hero-section-slide-food-1.png'
 import heroSecFoodSlide2 from './assets/images/hero-section-slide-food-2.png'
 import heroSecFoodSlide3 from './assets/images/hero-section-slide-food-3.png'
 import heroSecFoodSlide4 from './assets/images/hero-section-slide-food-4.png'
+import menuChickpaeSalad from './assets/images/menu-section-chickpae-salad.png'
+import menuChickpaeWrap from './assets/images/menu-section-chickpae-wrap.png'
+import menuMightyBurger from './assets/images/menu-section-mighty-burger.png'
 
 import { Slideshow } from './components/Slideshow'
+
+const menus = [
+  {
+    name: 'Mighty burger',
+    description: 'Served with fries and drink.',
+    image: menuMightyBurger,
+  },
+  {
+    name: "Chickpae's salad",
+    description: 'Served with fries and drink.',
+    image: menuChickpaeSalad,
+  },
+  {
+    name: "Chickpae's wrap",
+    description: 'Served with fries and drink.',
+    image: menuChickpaeWrap,
+  },
+]
 
 const App: React.FC = () => {
   return (
@@ -20,7 +41,7 @@ const App: React.FC = () => {
             <a href="#aboutus">ABOUT US</a>
           </span>
           <span className="mx-2">
-            <a href="#">MENU</a>
+            <a href="#menu">MENU</a>
           </span>
           <span className="mx-2">
             <a href="#">CONTACT</a>
@@ -40,11 +61,13 @@ const App: React.FC = () => {
               <br />
               non-obvious food.
             </p>
-            <button className="py-2 px-4 bg-orange-500 rounded-full hover:bg-orange-600">
-              <div className="flex items-center">
-                Check menu
-                <img src={checkMenuIcon} alt={'check menu icon'} className="ml-2" />
-              </div>
+            <button type="button" className="py-2 px-4 bg-orange-500 rounded-full hover:text-white hover:bg-orange-600">
+              <a href="#menu">
+                <div className="flex items-center">
+                  Check menu
+                  <img src={checkMenuIcon} alt={'check menu icon'} className="ml-2" />
+                </div>
+              </a>
             </button>
           </div>
           <div className="w-1/3 h-full bg-green-700"></div>
@@ -77,6 +100,30 @@ const App: React.FC = () => {
           <div className="absolute bg-green-700 rounded-full bottom-[10vh] left-[-10vw] w-[75vh] h-[75vh]"></div>
           <div className="absolute bottom-0 left-[10vw] w-[75vh] h-[75vh]">
             <img src={aboutUsSecFood} alt={'salad'} width={456} height={445} />
+          </div>
+        </div>
+      </section>
+      <section id="menu">
+        <div className="flex flex-col justify-center p-48 h-screen">
+          <div className="mb-12 text-center">
+            <h1 className="pb-2 text-xl text-amber-400">Menu</h1>
+            <h2 className="pb-2 text-3xl">Explore out best food</h2>
+            <p>Below you can see our best selling meals!</p>
+          </div>
+          <div className="flex gap-12 justify-center">
+            {menus.map((menu, index) => {
+              return (
+                <div key={index} className="rounded-lg shadow-xl w-[20vw]">
+                  <div>
+                    <img src={menu.image} alt={menu.name} className="object-cover" width={780} height={512} />
+                  </div>
+                  <div className="m-4">
+                    <h3 className="mb-2 text-xl font-bold">{menu.name}</h3>
+                    <p>{menu.description}</p>
+                  </div>
+                </div>
+              )
+            })}
           </div>
         </div>
       </section>
