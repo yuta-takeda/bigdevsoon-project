@@ -1,9 +1,12 @@
 import React from 'react'
 import checkMenuIcon from './assets/icons/check-menu-icon.svg'
+import facebookIcon from './assets/icons/facebook-icon.svg'
+import instagramIcon from './assets/icons/instagram-icon.svg'
 import logo from './assets/icons/logo.svg'
 import mapIcon from './assets/icons/map-icon.svg'
 import phoneIcon from './assets/icons/phone-icon.svg'
 import timeIcon from './assets/icons/time-icon.svg'
+import twitterIcon from './assets/icons/twitter-icon.svg'
 import aboutUsSecFood from './assets/images/about-us-section-food.png'
 import galleryPhoto1 from './assets/images/gallery-photo-1.png'
 import galleryPhoto2 from './assets/images/gallery-photo-2.png'
@@ -64,17 +67,17 @@ const App: React.FC = () => {
   return (
     <div>
       <header className="flex fixed top-0 z-10 justify-between items-center px-24 w-screen bg-white shadow-xl h-[72px]">
-        <a href="#top">
+        <a href="#top" className="hover:opacity-75">
           <img src={logo} alt="TheVeggieKingLogo" width={154.5} height={30} />
         </a>
         <nav>
-          <span className="mx-2">
+          <span className="mx-2 hover:text-gray-400">
             <a href="#aboutus">ABOUT US</a>
           </span>
-          <span className="mx-2">
+          <span className="mx-2 hover:text-gray-400">
             <a href="#menu">MENU</a>
           </span>
-          <span className="mx-2">
+          <span className="mx-2 hover:text-gray-400">
             <a href="#contact">CONTACT</a>
           </span>
         </nav>
@@ -181,7 +184,7 @@ const App: React.FC = () => {
         </div>
       </section>
       <section id="contact">
-        <div className="flex flex-col justify-center h-screen">
+        <div className="flex flex-col justify-center h-[calc(100vh_-_120px)]">
           <div className="mb-8 text-center">
             <h1 className="pb-2 text-xl text-amber-400">Contact</h1>
             <h2 className="pb-2 text-3xl">We're waiting for you!</h2>
@@ -202,6 +205,36 @@ const App: React.FC = () => {
           </div>
         </div>
       </section>
+      <footer className="bg-stone-200">
+        <div className="flex justify-between px-24 pt-6 pb-8 border-b border-stone-400 h-[120px]">
+          <a href="#top" className="hover:opacity-75">
+            <img src={logo} alt="TheVeggieKingLogo" width={154.5} height={30} />
+          </a>
+          <nav>
+            <span className="mx-4 hover:text-gray-400">
+              <a href="#aboutus">ABOUT US</a>
+            </span>
+            <span className="mx-4 hover:text-gray-400">
+              <a href="#menu">MENU</a>
+            </span>
+            <span className="mx-4 hover:text-gray-400">
+              <a href="#contact">CONTACT</a>
+            </span>
+          </nav>
+          <div className="w-1/3">
+            <p className="mb-4">
+              Stay up to date with our new openings, upcoming events, seasonal specials and promotions. Check our
+              socials.
+            </p>
+            <div className="flex gap-4">
+              <img src={twitterIcon} alt={'twitter link'} width={24} height={24} />
+              <img src={facebookIcon} alt={'facebook link'} width={24} height={24} />
+              <img src={instagramIcon} alt={'instagram link'} width={24} height={24} />
+            </div>
+          </div>
+        </div>
+        <div className="py-4 px-24">© 2023 The Veggie King</div>
+      </footer>
     </div>
   )
 }
