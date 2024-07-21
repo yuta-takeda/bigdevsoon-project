@@ -1,6 +1,9 @@
 import React from 'react'
 import checkMenuIcon from './assets/icons/check-menu-icon.svg'
 import logo from './assets/icons/logo.svg'
+import mapIcon from './assets/icons/map-icon.svg'
+import phoneIcon from './assets/icons/phone-icon.svg'
+import timeIcon from './assets/icons/time-icon.svg'
 import aboutUsSecFood from './assets/images/about-us-section-food.png'
 import galleryPhoto1 from './assets/images/gallery-photo-1.png'
 import galleryPhoto2 from './assets/images/gallery-photo-2.png'
@@ -37,13 +40,33 @@ const menus = [
   },
 ]
 
+const contactItems = [
+  {
+    name: 'Working Hours',
+    description: 'Today 12 pm - 9 pm',
+    image: timeIcon,
+  },
+  {
+    name: 'Find Us',
+    description: '3883 Rupert St. Vancouver',
+    image: mapIcon,
+  },
+  {
+    name: 'Call to Us',
+    description: '(604) 569-2198',
+    image: phoneIcon,
+  },
+]
+
 const galleryPhotos = [galleryPhoto1, galleryPhoto2, galleryPhoto3, galleryPhoto4, galleryPhoto5, galleryPhoto6]
 
 const App: React.FC = () => {
   return (
     <div>
       <header className="flex fixed top-0 z-10 justify-between items-center px-24 w-screen bg-white shadow-xl h-[72px]">
-        <img src={logo} alt="TheVeggieKingLogo" width={154.5} height={30} />
+        <a href="#top">
+          <img src={logo} alt="TheVeggieKingLogo" width={154.5} height={30} />
+        </a>
         <nav>
           <span className="mx-2">
             <a href="#aboutus">ABOUT US</a>
@@ -52,7 +75,7 @@ const App: React.FC = () => {
             <a href="#menu">MENU</a>
           </span>
           <span className="mx-2">
-            <a href="#">CONTACT</a>
+            <a href="#contact">CONTACT</a>
           </span>
         </nav>
       </header>
@@ -151,6 +174,28 @@ const App: React.FC = () => {
                     height={624}
                     className="object-cover w-full h-full"
                   />
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+      <section id="contact">
+        <div className="flex flex-col justify-center h-screen">
+          <div className="mb-8 text-center">
+            <h1 className="pb-2 text-xl text-amber-400">Contact</h1>
+            <h2 className="pb-2 text-3xl">We're waiting for you!</h2>
+          </div>
+          <div className="flex gap-12 justify-center">
+            {contactItems.map((contactItem, index) => {
+              return (
+                <div
+                  key={index}
+                  className="flex flex-col justify-center items-center p-4 text-center rounded-full shadow-2xl w-[20vw] max-w-72"
+                >
+                  <img src={contactItem.image} alt={contactItem.name} width={32} height={32} />
+                  <h3 className="m-2 text-lg font-bold">{contactItem.description}</h3>
+                  <p>{contactItem.name}</p>
                 </div>
               )
             })}
