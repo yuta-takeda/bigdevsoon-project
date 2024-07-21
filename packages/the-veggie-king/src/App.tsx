@@ -148,8 +148,14 @@ const App: React.FC = () => {
             {menus.map((menu, index) => {
               return (
                 <div key={index} className="rounded-lg shadow-xl w-[20vw]">
-                  <div>
-                    <img src={menu.image} alt={menu.name} className="object-cover" width={780} height={512} />
+                  <div className="overflow-hidden">
+                    <img
+                      src={menu.image}
+                      alt={menu.name}
+                      className="object-cover transition-all hover:scale-110"
+                      width={780}
+                      height={512}
+                    />
                   </div>
                   <div className="m-4">
                     <h3 className="mb-2 text-xl font-bold">{menu.name}</h3>
@@ -169,13 +175,13 @@ const App: React.FC = () => {
           <div className="grid grid-cols-3 gap-0">
             {galleryPhotos.map((image, index) => {
               return (
-                <div key={index} className="h-[30vh]">
+                <div key={index} className="overflow-hidden h-[30vh]">
                   <img
                     src={image}
                     alt={'gallery image'}
                     width={960}
                     height={624}
-                    className="object-cover w-full h-full"
+                    className="object-cover w-full h-full transition-all hover:scale-110"
                   />
                 </div>
               )
@@ -227,9 +233,25 @@ const App: React.FC = () => {
               socials.
             </p>
             <div className="flex gap-4">
-              <img src={twitterIcon} alt={'twitter link'} width={24} height={24} />
-              <img src={facebookIcon} alt={'facebook link'} width={24} height={24} />
-              <img src={instagramIcon} alt={'instagram link'} width={24} height={24} />
+              <a href="https://x.com/" target="_blank" rel="noopener noreferrer" className="hover:opacity-75">
+                <img src={twitterIcon} alt={'twitter link'} width={24} height={24} />
+              </a>
+              <a
+                href="https://www.facebook.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:opacity-75"
+              >
+                <img src={facebookIcon} alt={'facebook link'} width={24} height={24} />
+              </a>
+              <a
+                href="https://www.instagram.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:opacity-75"
+              >
+                <img src={instagramIcon} alt={'instagram link'} width={24} height={24} />
+              </a>
             </div>
           </div>
         </div>
