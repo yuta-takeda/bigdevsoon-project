@@ -2,6 +2,12 @@ import React from 'react'
 import checkMenuIcon from './assets/icons/check-menu-icon.svg'
 import logo from './assets/icons/logo.svg'
 import aboutUsSecFood from './assets/images/about-us-section-food.png'
+import galleryPhoto1 from './assets/images/gallery-photo-1.png'
+import galleryPhoto2 from './assets/images/gallery-photo-2.png'
+import galleryPhoto3 from './assets/images/gallery-photo-3.png'
+import galleryPhoto4 from './assets/images/gallery-photo-4.png'
+import galleryPhoto5 from './assets/images/gallery-photo-5.png'
+import galleryPhoto6 from './assets/images/gallery-photo-6.png'
 import heroSecFood from './assets/images/hero-section-food.png'
 import heroSecFoodSlide1 from './assets/images/hero-section-slide-food-1.png'
 import heroSecFoodSlide2 from './assets/images/hero-section-slide-food-2.png'
@@ -30,6 +36,8 @@ const menus = [
     image: menuChickpaeWrap,
   },
 ]
+
+const galleryPhotos = [galleryPhoto1, galleryPhoto2, galleryPhoto3, galleryPhoto4, galleryPhoto5, galleryPhoto6]
 
 const App: React.FC = () => {
   return (
@@ -121,6 +129,28 @@ const App: React.FC = () => {
                     <h3 className="mb-2 text-xl font-bold">{menu.name}</h3>
                     <p>{menu.description}</p>
                   </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+      <section id="gallery">
+        <div className="flex flex-col justify-center h-screen">
+          <div className="m-4 text-center">
+            <h2 className="pb-2 text-3xl">Good food = happy clients</h2>
+          </div>
+          <div className="grid grid-cols-3 gap-0">
+            {galleryPhotos.map((image, index) => {
+              return (
+                <div key={index} className="h-[30vh]">
+                  <img
+                    src={image}
+                    alt={'gallery image'}
+                    width={960}
+                    height={624}
+                    className="object-cover w-full h-full"
+                  />
                 </div>
               )
             })}
