@@ -18,9 +18,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "npx tailwindcss -i ./src/input.css -o ./public/output.css && react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build:css": "npx tailwindcss -i ./src/input.css -o ./public/output.css --watch"
   },
   "eslintConfig": {
     "extends": ["react-app", "react-app/jest"]
@@ -28,5 +29,8 @@
   "browserslist": {
     "production": [">0.2%", "not dead", "not op_mini all"],
     "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.6"
   }
 }
