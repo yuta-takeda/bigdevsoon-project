@@ -1,6 +1,7 @@
 import React from 'react'
 import checkMenuIcon from './assets/icons/check-menu-icon.svg'
 import logo from './assets/icons/logo.svg'
+import aboutUsSecFood from './assets/images/about-us-section-food.png'
 import heroSecFood from './assets/images/hero-section-food.png'
 import heroSecFoodSlide1 from './assets/images/hero-section-slide-food-1.png'
 import heroSecFoodSlide2 from './assets/images/hero-section-slide-food-2.png'
@@ -12,11 +13,11 @@ import { Slideshow } from './components/Slideshow'
 const App: React.FC = () => {
   return (
     <div>
-      <header className="flex fixed top-0 justify-between items-center px-24 w-screen shadow-xl h-[72px]">
+      <header className="flex fixed top-0 z-10 justify-between items-center px-24 w-screen bg-white shadow-xl h-[72px]">
         <img src={logo} alt="TheVeggieKingLogo" width={154.5} height={30} />
         <nav>
           <span className="mx-2">
-            <a href="#">ABOUT US</a>
+            <a href="#aboutus">ABOUT US</a>
           </span>
           <span className="mx-2">
             <a href="#">MENU</a>
@@ -26,7 +27,7 @@ const App: React.FC = () => {
           </span>
         </nav>
       </header>
-      <section>
+      <section id="top">
         <div className="flex justify-center items-center pl-24 h-[calc(100vh_-_72px)] mt-[72px]">
           <div className="w-2/3">
             <h2 className="pb-4 text-6xl font-bold leading-tight">
@@ -57,6 +58,25 @@ const App: React.FC = () => {
               images={[heroSecFoodSlide1, heroSecFoodSlide2, heroSecFoodSlide3, heroSecFoodSlide4]}
               intervalMs={5000}
             />
+          </div>
+        </div>
+      </section>
+      <section id="aboutus">
+        <div className="flex justify-center items-center p-48 h-screen">
+          <div className="w-1/2"></div>
+          <div className="w-1/2">
+            <h1 className="pb-2 text-xl text-amber-400">About Us</h1>
+            <h2 className="pb-2 text-3xl">Few words about us</h2>
+            <p>
+              We are not ordinary food truck. We create a place overflowing with positive energy that it expresses
+              important to us values. Get to know them specifically.
+            </p>
+          </div>
+        </div>
+        <div className="relative">
+          <div className="absolute bg-green-700 rounded-full bottom-[10vh] left-[-10vw] w-[75vh] h-[75vh]"></div>
+          <div className="absolute bottom-0 left-[10vw] w-[75vh] h-[75vh]">
+            <img src={aboutUsSecFood} alt={'salad'} width={456} height={445} />
           </div>
         </div>
       </section>
