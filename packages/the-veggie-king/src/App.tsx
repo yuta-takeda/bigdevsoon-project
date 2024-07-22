@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import checkMenuIcon from './assets/icons/check-menu-icon.svg'
+import menuCloseIcon from './assets/icons/close-menu-icon.svg'
 import facebookIcon from './assets/icons/facebook-icon.svg'
 import instagramIcon from './assets/icons/instagram-icon.svg'
 import logo from './assets/icons/logo.svg'
 import mapIcon from './assets/icons/map-icon.svg'
+import menuOpenIcon from './assets/icons/menu-icon.svg'
 import phoneIcon from './assets/icons/phone-icon.svg'
 import timeIcon from './assets/icons/time-icon.svg'
 import twitterIcon from './assets/icons/twitter-icon.svg'
@@ -64,23 +66,54 @@ const contactItems = [
 const galleryPhotos = [galleryPhoto1, galleryPhoto2, galleryPhoto3, galleryPhoto4, galleryPhoto5, galleryPhoto6]
 
 const App: React.FC = () => {
+  const [openMenu, setOpenMenu] = useState(false)
+  const handleOpenMenu = () => {
+    setOpenMenu(!openMenu)
+  }
+
+  const menuList = (
+    <>
+      <a href="#aboutus">
+        <li className="hover:text-gray-400">ABOUT US</li>
+      </a>
+      <a href="#menu">
+        <li className="hover:text-gray-400">MENU</li>
+      </a>
+      <a href="#contact">
+        <li className="hover:text-gray-400">CONTACT</li>
+      </a>
+    </>
+  )
+
   return (
     <div>
-      <header className="flex fixed top-0 z-10 justify-between items-center px-24 w-screen bg-white shadow-xl h-[72px]">
-        <a href="#top" className="hover:opacity-75">
-          <img src={logo} alt="TheVeggieKingLogo" width={154.5} height={30} />
-        </a>
-        <nav>
-          <span className="mx-2 hover:text-gray-400">
-            <a href="#aboutus">ABOUT US</a>
-          </span>
-          <span className="mx-2 hover:text-gray-400">
-            <a href="#menu">MENU</a>
-          </span>
-          <span className="mx-2 hover:text-gray-400">
-            <a href="#contact">CONTACT</a>
-          </span>
-        </nav>
+      <header className="flex fixed top-0 z-10 flex-col py-6 px-6 w-screen bg-white shadow-xl sm:px-24 min-h-[72px]">
+        <div className="flex justify-between items-center">
+          <div>
+            <a href="#top" className="hover:opacity-75">
+              <img src={logo} alt="TheVeggieKingLogo" width={154.5} height={30} />
+            </a>
+          </div>
+
+          {/* Mobile Hamburger Menu */}
+          <div className="sm:hidden hover:opacity-75">
+            <button type="button" onClick={handleOpenMenu} className="z-10">
+              <img src={openMenu ? menuCloseIcon : menuOpenIcon} />
+            </button>
+          </div>
+
+          {/* Desktop Menu */}
+          <nav className="hidden sm:block">
+            <ul className="flex gap-x-6">{menuList}</ul>
+          </nav>
+        </div>
+
+        {/* Mobile Menu */}
+        {openMenu && (
+          <nav className="my-8 w-full text-center bg-white transition duration-500 ease-in-out">
+            <ul className="flex flex-col gap-y-6">{menuList}</ul>
+          </nav>
+        )}
       </header>
       <section id="top">
         <div className="flex justify-center items-center pl-24 h-[calc(100vh_-_72px)] mt-[72px]">
