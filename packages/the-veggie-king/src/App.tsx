@@ -98,7 +98,7 @@ const App: React.FC = () => {
           {/* Mobile Hamburger Menu */}
           <div className="sm:hidden hover:opacity-75">
             <button type="button" onClick={handleOpenMenu} className="z-10">
-              <img src={openMenu ? menuCloseIcon : menuOpenIcon} />
+              <img src={openMenu ? menuCloseIcon : menuOpenIcon} alt="open menu" />
             </button>
           </div>
 
@@ -143,7 +143,7 @@ const App: React.FC = () => {
             />
           </div>
           <div className="absolute left-0 bottom-[-5vh]">
-            <img src={heroSecFood} alt={'hero section food image'} />
+            <img src={heroSecFood} alt={'hero section food'} />
           </div>
         </div>
       </section>
@@ -207,7 +207,7 @@ const App: React.FC = () => {
                 <div key={index} className="overflow-hidden h-[30vh]">
                   <img
                     src={image}
-                    alt={'gallery image'}
+                    alt={'gallery'}
                     width={960}
                     height={624}
                     className="object-cover w-full h-full transition-all hover:scale-110"
