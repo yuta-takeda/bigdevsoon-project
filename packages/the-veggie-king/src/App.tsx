@@ -148,7 +148,7 @@ const App: React.FC = () => {
         </div>
       </section>
       <section id="aboutus">
-        <div className="flex justify-center items-center p-8 h-screen sm:p-48">
+        <div className="flex justify-center items-center p-8 h-screen sm:p-[12vw]">
           <div className="w-1/2"></div>
           <div className="w-1/2">
             <h1 className="pb-2 text-xl text-amber-400">About Us</h1>
@@ -160,8 +160,8 @@ const App: React.FC = () => {
           </div>
         </div>
         <div className="relative -z-10">
-          <div className="absolute bg-green-700 rounded-full bottom-[10vh] left-[-120vw] w-[75vh] h-[75vh] sm:left-[-10vw]"></div>
-          <div className="absolute bottom-0 left-[-75vw] w-[75vh] h-[75vh] sm:left-[10vw]">
+          <div className="absolute bg-green-700 rounded-full bottom-[10vh] left-[calc(-750px_+_40vw)] w-[75vh] h-[75vh] sm:left-[calc(-900px_+_40vw)]"></div>
+          <div className="absolute bottom-0 left-[calc(-450px_+_40vw)] w-[75vh] h-[75vh] sm:left-[calc(-500px_+_40vw)]">
             <img src={aboutUsSecFood} alt={'salad'} width={456} height={445} />
           </div>
         </div>
