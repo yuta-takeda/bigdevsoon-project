@@ -98,7 +98,7 @@ const App: React.FC = () => {
           {/* Mobile Hamburger Menu */}
           <div className="sm:hidden hover:opacity-75">
             <button type="button" onClick={handleOpenMenu} className="z-10">
-              <img src={openMenu ? menuCloseIcon : menuOpenIcon} alt="open menu" />
+              <img src={openMenu ? menuCloseIcon : menuOpenIcon} alt="open menu" width={24} height={24} />
             </button>
           </div>
 
@@ -128,7 +128,7 @@ const App: React.FC = () => {
               <a href="#menu">
                 <div className="flex items-center">
                   Check menu
-                  <img src={checkMenuIcon} alt={'check menu icon'} className="ml-2" />
+                  <img src={checkMenuIcon} alt={'check menu icon'} className="ml-2" width={24} height={24} />
                 </div>
               </a>
             </button>
