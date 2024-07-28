@@ -7,6 +7,13 @@ import hair4 from './assets/customize-look-preview-icons-right-side/hair/hair-4.
 import hair5 from './assets/customize-look-preview-icons-right-side/hair/hair-5.svg'
 import hair6 from './assets/customize-look-preview-icons-right-side/hair/hair-6.svg'
 
+import eye1 from './assets/customize-look-preview-icons-right-side/eyes/eyes-1.svg'
+import eye2 from './assets/customize-look-preview-icons-right-side/eyes/eyes-2.svg'
+import eye3 from './assets/customize-look-preview-icons-right-side/eyes/eyes-3.svg'
+import eye4 from './assets/customize-look-preview-icons-right-side/eyes/eyes-4.svg'
+import eye5 from './assets/customize-look-preview-icons-right-side/eyes/eyes-5.svg'
+import eye6 from './assets/customize-look-preview-icons-right-side/eyes/eyes-6.svg'
+
 import baseCanvas from './assets/character-images-left-side/default/basic-character.png'
 import hairCanvas1 from './assets/character-images-left-side/hair/hair-1.png'
 import hairCanvas2 from './assets/character-images-left-side/hair/hair-2.png'
@@ -15,13 +22,21 @@ import hairCanvas4 from './assets/character-images-left-side/hair/hair-4.png'
 import hairCanvas5 from './assets/character-images-left-side/hair/hair-5.png'
 import hairCanvas6 from './assets/character-images-left-side/hair/hair-6.png'
 
+import eyeCanvas1 from './assets/character-images-left-side/eyes/eye-1.png'
+import eyeCanvas2 from './assets/character-images-left-side/eyes/eye-2.png'
+import eyeCanvas3 from './assets/character-images-left-side/eyes/eye-3.png'
+import eyeCanvas4 from './assets/character-images-left-side/eyes/eye-4.png'
+import eyeCanvas5 from './assets/character-images-left-side/eyes/eye-5.png'
+import eyeCanvas6 from './assets/character-images-left-side/eyes/eye-6.png'
+
 interface CurrentFaceParts {
   base: string
-  hairs: string
+  hair: string
+  eyes: string
 }
 
 const faceParts = {
-  hairs: [
+  hair: [
     {
       name: 'hair-1',
       src: hair1,
@@ -53,17 +68,51 @@ const faceParts = {
       canvasSrc: hairCanvas6,
     },
   ],
+  eyes: [
+    {
+      name: 'eye-1',
+      src: eye1,
+      canvasSrc: eyeCanvas1,
+    },
+    {
+      name: 'eye-2',
+      src: eye2,
+      canvasSrc: eyeCanvas2,
+    },
+    {
+      name: 'eye-3',
+      src: eye3,
+      canvasSrc: eyeCanvas3,
+    },
+    {
+      name: 'eye-4',
+      src: eye4,
+      canvasSrc: eyeCanvas4,
+    },
+    {
+      name: 'eye-5',
+      src: eye5,
+      canvasSrc: eyeCanvas5,
+    },
+    {
+      name: 'eye-6',
+      src: eye6,
+      canvasSrc: eyeCanvas6,
+    },
+  ],
 }
 
 const genres = ['Hair', 'Eyes', 'Ears', 'Nose', 'Mouth', 'Background', 'Accessories']
 
-const facePartsOrder = ['base', 'hairs'] as const
+const facePartsOrder = ['base', 'hair', 'eyes'] as const
 
 const App: React.FC = () => {
   const [currentFaceParts, setCurrentFaceParts] = React.useState<CurrentFaceParts>({
     base: baseCanvas,
-    hairs: '',
+    hair: '',
+    eyes: '',
   })
+  const [currentSelectedType, setCurrentSelectedType] = React.useState<'hair' | 'eyes'>('hair')
 
   React.useEffect(() => {
     drawFace()
@@ -75,13 +124,21 @@ const App: React.FC = () => {
     const imgid = target.dataset.imgid
     if (!facetype || !imgid) return
 
-    const canvasSrc = faceParts.hairs.find((hair) => hair.name === imgid)?.canvasSrc
+    const canvasSrc = faceParts[currentSelectedType].find((parts) => parts.name === imgid)?.canvasSrc
     if (!canvasSrc) return
 
     setCurrentFaceParts({
       ...currentFaceParts,
       [facetype]: canvasSrc,
     })
+  }
+
+  const handleCurrentSelectedType = (e: React.MouseEvent<HTMLElement>) => {
+    const target = e.target as HTMLButtonElement
+    const facetype = target.dataset.facetype
+    if (!facetype) return
+
+    setCurrentSelectedType(facetype as 'hair' | 'eyes')
   }
 
   const drawFace = () => {
@@ -127,20 +184,32 @@ const App: React.FC = () => {
             <h2 className="mb-4 text-xl font-bold">Customize Look</h2>
             <div className="flex flex-wrap gap-2 mb-8 text-sm text-sky-600">
               {genres.map((genre) => {
-                return <div className="py-1 px-4 mb-1 rounded-full border border-solid border-sky-600">{genre}</div>
+                return (
+                  <button
+                    type="button"
+                    key={genre}
+                    className={`py-1 px-4 mb-1 rounded-full border border-solid hover:text-white border-sky-600 hover:bg-sky-600 ${currentSelectedType === genre.toLowerCase() ? 'text-white bg-sky-600' : 'text-sky-600'}`}
+                    data-facetype={genre.toLowerCase()}
+                    onClick={handleCurrentSelectedType}
+                  >
+                    {genre}
+                  </button>
+                )
               })}
             </div>
             <div className="flex flex-wrap gap-8 justify-between">
-              {faceParts.hairs.map((hair) => {
+              {faceParts[currentSelectedType].map((hair) => {
                 return (
-                  <div className="w-1/4" key={hair.name}>
-                    <img
-                      src={hair.src}
-                      alt={hair.name}
-                      data-facetype={'hairs'}
-                      data-imgid={hair.name}
-                      onClick={setFaceParts}
-                    />
+                  <div className="flex justify-center items-center w-1/4 min-h-[100px]" key={hair.name}>
+                    <button type="button">
+                      <img
+                        src={hair.src}
+                        alt={hair.name}
+                        data-facetype={currentSelectedType}
+                        data-imgid={hair.name}
+                        onClick={setFaceParts}
+                      />
+                    </button>
                   </div>
                 )
               })}
