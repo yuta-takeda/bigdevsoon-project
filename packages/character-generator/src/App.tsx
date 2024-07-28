@@ -14,6 +14,12 @@ import eye4 from './assets/customize-look-preview-icons-right-side/eyes/eyes-4.s
 import eye5 from './assets/customize-look-preview-icons-right-side/eyes/eyes-5.svg'
 import eye6 from './assets/customize-look-preview-icons-right-side/eyes/eyes-6.svg'
 
+import ears1 from './assets/customize-look-preview-icons-right-side/ears/ears-1.svg'
+import ears2 from './assets/customize-look-preview-icons-right-side/ears/ears-2.svg'
+import ears3 from './assets/customize-look-preview-icons-right-side/ears/ears-3.svg'
+import ears4 from './assets/customize-look-preview-icons-right-side/ears/ears-4.svg'
+import ears5 from './assets/customize-look-preview-icons-right-side/ears/ears-5.svg'
+
 import baseCanvas from './assets/character-images-left-side/default/basic-character.png'
 import hairCanvas1 from './assets/character-images-left-side/hair/hair-1.png'
 import hairCanvas2 from './assets/character-images-left-side/hair/hair-2.png'
@@ -29,10 +35,17 @@ import eyeCanvas4 from './assets/character-images-left-side/eyes/eye-4.png'
 import eyeCanvas5 from './assets/character-images-left-side/eyes/eye-5.png'
 import eyeCanvas6 from './assets/character-images-left-side/eyes/eye-6.png'
 
+import earsCanvas1 from './assets/character-images-left-side/ears/ear-1.png'
+import earsCanvas2 from './assets/character-images-left-side/ears/ear-2.png'
+import earsCanvas3 from './assets/character-images-left-side/ears/ear-3.png'
+import earsCanvas4 from './assets/character-images-left-side/ears/ear-4.png'
+import earsCanvas5 from './assets/character-images-left-side/ears/ear-5.png'
+
 interface CurrentFaceParts {
   base: string
   hair: string
   eyes: string
+  ears: string
 }
 
 const faceParts = {
@@ -100,19 +113,48 @@ const faceParts = {
       canvasSrc: eyeCanvas6,
     },
   ],
+  ears: [
+    {
+      name: 'ears-1',
+      src: ears1,
+      canvasSrc: earsCanvas1,
+    },
+    {
+      name: 'ears-2',
+      src: ears2,
+      canvasSrc: earsCanvas2,
+    },
+    {
+      name: 'ears-3',
+      src: ears3,
+      canvasSrc: earsCanvas3,
+    },
+    {
+      name: 'ears-4',
+      src: ears4,
+      canvasSrc: earsCanvas4,
+    },
+    {
+      name: 'ears-5',
+      src: ears5,
+      canvasSrc: earsCanvas5,
+    },
+  ],
 }
 
 const genres = ['Hair', 'Eyes', 'Ears', 'Nose', 'Mouth', 'Background', 'Accessories']
 
-const facePartsOrder = ['base', 'hair', 'eyes'] as const
+const facePartsOrder = ['base', 'hair', 'eyes', 'ears'] as const
+type SelectableFaceParts = Exclude<(typeof facePartsOrder)[number], 'base'>
 
 const App: React.FC = () => {
   const [currentFaceParts, setCurrentFaceParts] = React.useState<CurrentFaceParts>({
     base: baseCanvas,
     hair: '',
     eyes: '',
+    ears: '',
   })
-  const [currentSelectedType, setCurrentSelectedType] = React.useState<'hair' | 'eyes'>('hair')
+  const [currentSelectedType, setCurrentSelectedType] = React.useState<SelectableFaceParts>('hair')
 
   React.useEffect(() => {
     drawFace()
@@ -138,7 +180,7 @@ const App: React.FC = () => {
     const facetype = target.dataset.facetype
     if (!facetype) return
 
-    setCurrentSelectedType(facetype as 'hair' | 'eyes')
+    setCurrentSelectedType(facetype as SelectableFaceParts)
   }
 
   const drawFace = () => {
