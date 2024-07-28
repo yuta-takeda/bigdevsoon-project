@@ -34,6 +34,12 @@ import mouth4 from './assets/customize-look-preview-icons-right-side/mouth/mouth
 import mouth5 from './assets/customize-look-preview-icons-right-side/mouth/mouth-5.svg'
 import mouth6 from './assets/customize-look-preview-icons-right-side/mouth/mouth-6.svg'
 
+import accessory1 from './assets/customize-look-preview-icons-right-side/accessories/accessory-1.svg'
+import accessory2 from './assets/customize-look-preview-icons-right-side/accessories/accessory-2.svg'
+import accessory3 from './assets/customize-look-preview-icons-right-side/accessories/accessory-3.svg'
+import accessory4 from './assets/customize-look-preview-icons-right-side/accessories/accessory-4.svg'
+import accessory5 from './assets/customize-look-preview-icons-right-side/accessories/accessory-5.svg'
+
 import baseCanvas from './assets/character-images-left-side/default/basic-character.png'
 import hairCanvas1 from './assets/character-images-left-side/hair/hair-1.png'
 import hairCanvas2 from './assets/character-images-left-side/hair/hair-2.png'
@@ -69,6 +75,12 @@ import mouthCanvas4 from './assets/character-images-left-side/mouth/mouth-4.png'
 import mouthCanvas5 from './assets/character-images-left-side/mouth/mouth-5.png'
 import mouthCanvas6 from './assets/character-images-left-side/mouth/mouth-6.png'
 
+import accessoryCanvas1 from './assets/character-images-left-side/accessories/accessory-1.png'
+import accessoryCanvas2 from './assets/character-images-left-side/accessories/accessory-2.png'
+import accessoryCanvas3 from './assets/character-images-left-side/accessories/accessory-3.png'
+import accessoryCanvas4 from './assets/character-images-left-side/accessories/accessory-4.png'
+import accessoryCanvas5 from './assets/character-images-left-side/accessories/accessory-5.png'
+
 interface CurrentFaceParts {
   base: string
   hair: string
@@ -76,6 +88,7 @@ interface CurrentFaceParts {
   ears: string
   nose: string
   mouth: string
+  accessories: string
 }
 
 const faceParts = {
@@ -234,11 +247,38 @@ const faceParts = {
       canvasSrc: mouthCanvas6,
     },
   ],
+  accessories: [
+    {
+      name: 'accessory-1',
+      src: accessory1,
+      canvasSrc: accessoryCanvas1,
+    },
+    {
+      name: 'accessory-2',
+      src: accessory2,
+      canvasSrc: accessoryCanvas2,
+    },
+    {
+      name: 'accessory-3',
+      src: accessory3,
+      canvasSrc: accessoryCanvas3,
+    },
+    {
+      name: 'accessory-4',
+      src: accessory4,
+      canvasSrc: accessoryCanvas4,
+    },
+    {
+      name: 'accessory-5',
+      src: accessory5,
+      canvasSrc: accessoryCanvas5,
+    },
+  ],
 }
 
 const genres = ['Hair', 'Eyes', 'Ears', 'Nose', 'Mouth', 'Background', 'Accessories']
 
-const facePartsOrder = ['base', 'hair', 'eyes', 'ears', 'nose', 'mouth'] as const
+const facePartsOrder = ['base', 'hair', 'eyes', 'ears', 'nose', 'mouth', 'accessories'] as const
 type SelectableFaceParts = Exclude<(typeof facePartsOrder)[number], 'base'>
 
 const App: React.FC = () => {
@@ -249,6 +289,7 @@ const App: React.FC = () => {
     ears: '',
     nose: '',
     mouth: '',
+    accessories: '',
   })
   const [currentSelectedType, setCurrentSelectedType] = React.useState<SelectableFaceParts>('hair')
 
