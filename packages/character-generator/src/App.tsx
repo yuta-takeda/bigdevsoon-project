@@ -315,6 +315,7 @@ const App: React.FC = () => {
 
   React.useEffect(() => {
     drawFace()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentFaceParts])
 
   const setFaceParts = (e: React.MouseEvent<HTMLElement>) => {
@@ -324,7 +325,7 @@ const App: React.FC = () => {
     if (!facetype || !imgid) return
 
     const canvasSrc =
-      currentSelectedType == 'background' ? imgid : (
+      currentSelectedType === 'background' ? imgid : (
         faceParts[currentSelectedType].find((parts) => parts.name === imgid)?.canvasSrc
       )
     if (!canvasSrc) return
@@ -436,7 +437,13 @@ const App: React.FC = () => {
                 onClick={setRandomFaceParts}
               >
                 <div className="flex gap-2 justify-center">
-                  <img src={randomIcon} width={16} height={16} className="filter brightness-0 invert" />
+                  <img
+                    src={randomIcon}
+                    width={16}
+                    height={16}
+                    className="filter brightness-0 invert"
+                    alt="make random face"
+                  />
                   Random
                 </div>
               </button>
@@ -446,7 +453,7 @@ const App: React.FC = () => {
                 onClick={downloadImage}
               >
                 <div className="flex gap-2 justify-center">
-                  <img src={downloadIcon} width={16} height={16} />
+                  <img src={downloadIcon} width={16} height={16} alt="download" />
                   Download
                 </div>
               </button>
@@ -484,7 +491,7 @@ const App: React.FC = () => {
                     >
                       {currentFaceParts[currentSelectedType] === color && (
                         <div className="absolute right-0 -top-0 bg-white rounded-full border border-solid">
-                          <img src={checkIcon} width={16} height={16} />
+                          <img src={checkIcon} width={16} height={16} alt="part is used" />
                         </div>
                       )}
                     </button>
@@ -504,7 +511,7 @@ const App: React.FC = () => {
                       </button>
                       {currentFaceParts[currentSelectedType] === parts.canvasSrc && (
                         <div className="absolute right-0 -top-4 bg-white rounded-full border border-solid">
-                          <img src={checkIcon} width={16} height={16} />
+                          <img src={checkIcon} width={16} height={16} alt="part is used" />
                         </div>
                       )}
                     </div>
@@ -517,9 +524,9 @@ const App: React.FC = () => {
       </div>
       {downloadSuccess && (
         <div className="flex absolute right-8 bottom-8 gap-2 p-2 text-white bg-blue-400" onClick={handleDownloadLabel}>
-          <img src={infoIcon} width={20} height={20} className="filter brightness-0 invert" />
+          <img src={infoIcon} width={20} height={20} className="filter brightness-0 invert" alt="info" />
           Image has been downloaded
-          <img src={closeIcon} width={16} height={16} className="filter brightness-0 invert" />
+          <img src={closeIcon} width={16} height={16} className="filter brightness-0 invert" alt="remove popup" />
         </div>
       )}
     </div>
