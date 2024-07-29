@@ -81,6 +81,8 @@ import accessoryCanvas3 from './assets/character-images-left-side/accessories/ac
 import accessoryCanvas4 from './assets/character-images-left-side/accessories/accessory-4.png'
 import accessoryCanvas5 from './assets/character-images-left-side/accessories/accessory-5.png'
 
+import checkIcon from './assets/icons/check-icon.svg'
+
 interface CurrentFaceParts {
   base: string
   hair: string
@@ -398,28 +400,39 @@ const App: React.FC = () => {
                 backgroundColors.map((color) => {
                   return (
                     <button
-                      className="w-1/4 aspect-square"
+                      className="relative w-1/4 aspect-square"
                       style={{ backgroundColor: color }}
                       key={color}
                       type="button"
                       data-facetype="background"
                       data-imgid={color}
                       onClick={setFaceParts}
-                    ></button>
+                    >
+                      {currentFaceParts[currentSelectedType] === color && (
+                        <div className="absolute right-0 -top-0 bg-white rounded-full border border-solid">
+                          <img src={checkIcon} width={16} height={16} />
+                        </div>
+                      )}
+                    </button>
                   )
                 })
-              : faceParts[currentSelectedType].map((hair) => {
+              : faceParts[currentSelectedType].map((parts) => {
                   return (
-                    <div className="flex justify-center items-center w-1/4 min-h-[100px]" key={hair.name}>
+                    <div className="flex relative justify-center items-center w-1/4 min-h-[100px]" key={parts.name}>
                       <button type="button">
                         <img
-                          src={hair.src}
-                          alt={hair.name}
+                          src={parts.src}
+                          alt={parts.name}
                           data-facetype={currentSelectedType}
-                          data-imgid={hair.name}
+                          data-imgid={parts.name}
                           onClick={setFaceParts}
                         />
                       </button>
+                      {currentFaceParts[currentSelectedType] === parts.canvasSrc && (
+                        <div className="absolute right-0 -top-4 bg-white rounded-full border border-solid">
+                          <img src={checkIcon} width={16} height={16} />
+                        </div>
+                      )}
                     </div>
                   )
                 })
