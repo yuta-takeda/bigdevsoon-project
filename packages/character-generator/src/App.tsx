@@ -82,7 +82,9 @@ import accessoryCanvas4 from './assets/character-images-left-side/accessories/ac
 import accessoryCanvas5 from './assets/character-images-left-side/accessories/accessory-5.png'
 
 import checkIcon from './assets/icons/check-icon.svg'
+import closeIcon from './assets/icons/close-icon.svg'
 import downloadIcon from './assets/icons/download-icon.svg'
+import infoIcon from './assets/icons/info-icon.svg'
 import randomIcon from './assets/icons/random-icon.svg'
 
 interface CurrentFaceParts {
@@ -300,6 +302,7 @@ const App: React.FC = () => {
     background: '',
   })
   const [currentSelectedType, setCurrentSelectedType] = React.useState<SelectableFaceParts>('hair')
+  const [downloadSuccess, setDownloadSuccess] = React.useState<boolean>(false)
 
   React.useEffect(() => {
     drawFace()
@@ -357,6 +360,15 @@ const App: React.FC = () => {
     link.href = canvas.toDataURL('image/png')
     link.download = 'character.png'
     link.click()
+
+    setDownloadSuccess(true)
+    setTimeout(() => {
+      setDownloadSuccess(false)
+    }, 3000)
+  }
+
+  const handleDownloadLabel = () => {
+    setDownloadSuccess(false)
   }
 
   const drawFace = () => {
@@ -401,16 +413,16 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="flex justify-center px-8 w-full h-screen">
+    <div className="flex relative justify-center px-8 w-full h-screen">
       <div className="flex flex-col justify-center max-w-[1000px]">
         <header className="text-2xl font-bold md:text-4xl">CHARACTER GENERATOR</header>
         <div className="flex flex-col justify-center mt-8 md:flex-row">
           <div className="mr-4 mb-8 w-[80vw] h-[80vw] md:w-[45vw] md:h-[45vw] md:max-w-[500px] md:max-h-[500px]">
             <canvas id="canvas" width={500} height={500} className="mb-6 w-full h-full"></canvas>
-            <div className="flex gap-4 justify-stretch">
+            <div className="flex gap-4 w-full justify-stretch">
               <button
                 type="button"
-                className="py-2 px-4 w-48 text-white bg-blue-700 rounded-lg hover:opacity-75"
+                className="py-2 px-4 text-white bg-blue-700 rounded-lg hover:opacity-75 grow"
                 onClick={setRandomFaceParts}
               >
                 <div className="flex gap-2 justify-center">
@@ -420,7 +432,7 @@ const App: React.FC = () => {
               </button>
               <button
                 type="button"
-                className="py-2 px-4 w-48 rounded-lg border-2 border-solid hover:opacity-75"
+                className="py-2 px-4 rounded-lg border-2 border-solid hover:opacity-75 grow"
                 onClick={downloadImage}
               >
                 <div className="flex gap-2 justify-center">
@@ -493,6 +505,13 @@ const App: React.FC = () => {
           </div>
         </div>
       </div>
+      {downloadSuccess && (
+        <div className="flex absolute right-8 bottom-8 gap-2 p-2 text-white bg-blue-400" onClick={handleDownloadLabel}>
+          <img src={infoIcon} width={20} height={20} className="filter brightness-0 invert" />
+          Image has been downloaded
+          <img src={closeIcon} width={16} height={16} className="filter brightness-0 invert" />
+        </div>
+      )}
     </div>
   )
 }
