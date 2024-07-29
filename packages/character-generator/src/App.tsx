@@ -105,6 +105,8 @@ const genreLabels = ['Hair', 'Eyes', 'Ears', 'Nose', 'Mouth', 'Background', 'Acc
 
 const backgroundColors = ['gray', 'cyan', 'magenta', 'green', 'yellow', 'orange']
 
+const localStorageKey = 'characterGenerator.currentFaceParts'
+
 const faceParts = {
   hair: [
     {
@@ -305,6 +307,13 @@ const App: React.FC = () => {
   const [downloadSuccess, setDownloadSuccess] = React.useState<boolean>(false)
 
   React.useEffect(() => {
+    const savedFaceParts = localStorage.getItem(localStorageKey)
+    if (savedFaceParts) {
+      setCurrentFaceParts(JSON.parse(savedFaceParts))
+    }
+  }, [])
+
+  React.useEffect(() => {
     drawFace()
   }, [currentFaceParts])
 
@@ -320,10 +329,9 @@ const App: React.FC = () => {
       )
     if (!canvasSrc) return
 
-    setCurrentFaceParts({
-      ...currentFaceParts,
-      [facetype]: canvasSrc,
-    })
+    const newFaceParts = { ...currentFaceParts, [facetype]: canvasSrc }
+    localStorage.setItem(localStorageKey, JSON.stringify(newFaceParts))
+    setCurrentFaceParts(newFaceParts)
   }
 
   const setRandomFaceParts = () => {
@@ -341,7 +349,9 @@ const App: React.FC = () => {
         }
       })
 
-    setCurrentFaceParts({ ...currentFaceParts, ...randomFaceParts })
+    const newFaceParts = { ...currentFaceParts, ...randomFaceParts }
+    localStorage.setItem(localStorageKey, JSON.stringify(newFaceParts))
+    setCurrentFaceParts(newFaceParts)
   }
 
   const handleCurrentSelectedType = (e: React.MouseEvent<HTMLElement>) => {
