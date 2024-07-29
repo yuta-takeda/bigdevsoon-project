@@ -82,6 +82,7 @@ import accessoryCanvas4 from './assets/character-images-left-side/accessories/ac
 import accessoryCanvas5 from './assets/character-images-left-side/accessories/accessory-5.png'
 
 import checkIcon from './assets/icons/check-icon.svg'
+import randomIcon from './assets/icons/random-icon.svg'
 
 interface CurrentFaceParts {
   base: string
@@ -321,6 +322,24 @@ const App: React.FC = () => {
     })
   }
 
+  const setRandomFaceParts = () => {
+    const randomFaceParts = {} as CurrentFaceParts
+    genreLabels
+      .map((label) => label.toLowerCase())
+      .forEach((partsType) => {
+        if (partsType === 'background') {
+          randomFaceParts.background = backgroundColors[Math.floor(Math.random() * backgroundColors.length)]
+        } else {
+          const parts = faceParts[partsType as Exclude<SelectableFaceParts, 'background'>]
+
+          const randomParts = parts[Math.floor(Math.random() * parts.length)]
+          randomFaceParts[partsType as Exclude<SelectableFaceParts, 'background'>] = randomParts.canvasSrc
+        }
+      })
+
+    setCurrentFaceParts({ ...currentFaceParts, ...randomFaceParts })
+  }
+
   const handleCurrentSelectedType = (e: React.MouseEvent<HTMLElement>) => {
     const target = e.target as HTMLButtonElement
     const facetype = target.dataset.facetype
@@ -376,7 +395,17 @@ const App: React.FC = () => {
         <header className="text-2xl font-bold md:text-4xl">CHARACTER GENERATOR</header>
         <div className="flex flex-col justify-center mt-8 md:flex-row">
           <div className="mr-4 mb-8 w-[80vw] h-[80vw] md:w-[45vw] md:h-[45vw] md:max-w-[500px] md:max-h-[500px]">
-            <canvas id="canvas" width={500} height={500} className="w-full h-full"></canvas>
+            <canvas id="canvas" width={500} height={500} className="mb-6 w-full h-full"></canvas>
+            <button
+              type="button"
+              className="py-2 px-4 w-48 text-white bg-blue-700 rounded-lg hover:opacity-75"
+              onClick={setRandomFaceParts}
+            >
+              <div className="flex gap-2 justify-center">
+                <img src={randomIcon} width={16} height={16} className="filter brightness-0 invert" />
+                Random
+              </div>
+            </button>
           </div>
           <div className="md:ml-4 w-[80vw] md:w-[45vw] md:max-w-[500px]">
             <h2 className="mb-4 text-xl font-bold">Customize Look</h2>
