@@ -89,7 +89,9 @@ interface CurrentFaceParts {
   nose: string
   mouth: string
   accessories: string
+  background: string
 }
+type SelectableFaceParts = Exclude<keyof CurrentFaceParts, 'base'>
 
 const faceParts = {
   hair: [
@@ -276,10 +278,11 @@ const faceParts = {
   ],
 }
 
+const backgroundColors = ['gray', 'cyan', 'magenta', 'green', 'yellow', 'orange']
+
 const genres = ['Hair', 'Eyes', 'Ears', 'Nose', 'Mouth', 'Background', 'Accessories']
 
-const facePartsOrder = ['base', 'hair', 'eyes', 'ears', 'nose', 'mouth', 'accessories'] as const
-type SelectableFaceParts = Exclude<(typeof facePartsOrder)[number], 'base'>
+const facePartsOrder = ['background', 'base', 'hair', 'eyes', 'ears', 'nose', 'mouth', 'accessories'] as const
 
 const App: React.FC = () => {
   const [currentFaceParts, setCurrentFaceParts] = React.useState<CurrentFaceParts>({
@@ -290,6 +293,7 @@ const App: React.FC = () => {
     nose: '',
     mouth: '',
     accessories: '',
+    background: '',
   })
   const [currentSelectedType, setCurrentSelectedType] = React.useState<SelectableFaceParts>('hair')
 
@@ -303,7 +307,10 @@ const App: React.FC = () => {
     const imgid = target.dataset.imgid
     if (!facetype || !imgid) return
 
-    const canvasSrc = faceParts[currentSelectedType].find((parts) => parts.name === imgid)?.canvasSrc
+    const canvasSrc =
+      currentSelectedType == 'background' ? imgid : (
+        faceParts[currentSelectedType].find((parts) => parts.name === imgid)?.canvasSrc
+      )
     if (!canvasSrc) return
 
     setCurrentFaceParts({
@@ -330,6 +337,15 @@ const App: React.FC = () => {
     let loadedImages = 0
     const imageObjects = [] as HTMLImageElement[]
     facePartsOrder.forEach((partType) => {
+      // background の場合は canvas のスタイルを変更するだけ
+      if (partType === 'background') {
+        if (currentFaceParts.background) {
+          canvas.style.backgroundColor = currentFaceParts.background
+        }
+        loadedImages++
+        return
+      }
+
       const canvasSrc = currentFaceParts[partType as (typeof facePartsOrder)[number]]
       if (!canvasSrc) {
         loadedImages++
@@ -377,21 +393,36 @@ const App: React.FC = () => {
               })}
             </div>
             <div className="flex flex-wrap gap-8 justify-between">
-              {faceParts[currentSelectedType].map((hair) => {
-                return (
-                  <div className="flex justify-center items-center w-1/4 min-h-[100px]" key={hair.name}>
-                    <button type="button">
-                      <img
-                        src={hair.src}
-                        alt={hair.name}
-                        data-facetype={currentSelectedType}
-                        data-imgid={hair.name}
-                        onClick={setFaceParts}
-                      />
-                    </button>
-                  </div>
-                )
-              })}
+              {currentSelectedType === 'background' ?
+                backgroundColors.map((color) => {
+                  return (
+                    <button
+                      className="w-1/4 aspect-square"
+                      style={{ backgroundColor: color }}
+                      key={color}
+                      type="button"
+                      data-facetype="background"
+                      data-imgid={color}
+                      onClick={setFaceParts}
+                    ></button>
+                  )
+                })
+              : faceParts[currentSelectedType].map((hair) => {
+                  return (
+                    <div className="flex justify-center items-center w-1/4 min-h-[100px]" key={hair.name}>
+                      <button type="button">
+                        <img
+                          src={hair.src}
+                          alt={hair.name}
+                          data-facetype={currentSelectedType}
+                          data-imgid={hair.name}
+                          onClick={setFaceParts}
+                        />
+                      </button>
+                    </div>
+                  )
+                })
+              }
             </div>
           </div>
         </div>
