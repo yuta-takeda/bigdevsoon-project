@@ -82,6 +82,7 @@ import accessoryCanvas4 from './assets/character-images-left-side/accessories/ac
 import accessoryCanvas5 from './assets/character-images-left-side/accessories/accessory-5.png'
 
 import checkIcon from './assets/icons/check-icon.svg'
+import downloadIcon from './assets/icons/download-icon.svg'
 import randomIcon from './assets/icons/random-icon.svg'
 
 interface CurrentFaceParts {
@@ -348,6 +349,16 @@ const App: React.FC = () => {
     setCurrentSelectedType(facetype as SelectableFaceParts)
   }
 
+  const downloadImage = () => {
+    const canvas = document.querySelector('canvas#canvas') as HTMLCanvasElement
+    if (!canvas) return
+
+    const link = document.createElement('a')
+    link.href = canvas.toDataURL('image/png')
+    link.download = 'character.png'
+    link.click()
+  }
+
   const drawFace = () => {
     const canvas = document.querySelector('canvas#canvas') as HTMLCanvasElement
     if (!canvas) return
@@ -396,16 +407,28 @@ const App: React.FC = () => {
         <div className="flex flex-col justify-center mt-8 md:flex-row">
           <div className="mr-4 mb-8 w-[80vw] h-[80vw] md:w-[45vw] md:h-[45vw] md:max-w-[500px] md:max-h-[500px]">
             <canvas id="canvas" width={500} height={500} className="mb-6 w-full h-full"></canvas>
-            <button
-              type="button"
-              className="py-2 px-4 w-48 text-white bg-blue-700 rounded-lg hover:opacity-75"
-              onClick={setRandomFaceParts}
-            >
-              <div className="flex gap-2 justify-center">
-                <img src={randomIcon} width={16} height={16} className="filter brightness-0 invert" />
-                Random
-              </div>
-            </button>
+            <div className="flex gap-4 justify-stretch">
+              <button
+                type="button"
+                className="py-2 px-4 w-48 text-white bg-blue-700 rounded-lg hover:opacity-75"
+                onClick={setRandomFaceParts}
+              >
+                <div className="flex gap-2 justify-center">
+                  <img src={randomIcon} width={16} height={16} className="filter brightness-0 invert" />
+                  Random
+                </div>
+              </button>
+              <button
+                type="button"
+                className="py-2 px-4 w-48 rounded-lg border-2 border-solid hover:opacity-75"
+                onClick={downloadImage}
+              >
+                <div className="flex gap-2 justify-center">
+                  <img src={downloadIcon} width={16} height={16} />
+                  Download
+                </div>
+              </button>
+            </div>
           </div>
           <div className="md:ml-4 w-[80vw] md:w-[45vw] md:max-w-[500px]">
             <h2 className="mb-4 text-xl font-bold">Customize Look</h2>
