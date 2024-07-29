@@ -93,6 +93,12 @@ interface CurrentFaceParts {
 }
 type SelectableFaceParts = Exclude<keyof CurrentFaceParts, 'base'>
 
+const facePartsOrder = ['background', 'base', 'hair', 'eyes', 'ears', 'nose', 'mouth', 'accessories'] as const
+
+const genreLabels = ['Hair', 'Eyes', 'Ears', 'Nose', 'Mouth', 'Background', 'Accessories']
+
+const backgroundColors = ['gray', 'cyan', 'magenta', 'green', 'yellow', 'orange']
+
 const faceParts = {
   hair: [
     {
@@ -278,12 +284,6 @@ const faceParts = {
   ],
 }
 
-const backgroundColors = ['gray', 'cyan', 'magenta', 'green', 'yellow', 'orange']
-
-const genres = ['Hair', 'Eyes', 'Ears', 'Nose', 'Mouth', 'Background', 'Accessories']
-
-const facePartsOrder = ['background', 'base', 'hair', 'eyes', 'ears', 'nose', 'mouth', 'accessories'] as const
-
 const App: React.FC = () => {
   const [currentFaceParts, setCurrentFaceParts] = React.useState<CurrentFaceParts>({
     base: baseCanvas,
@@ -354,9 +354,10 @@ const App: React.FC = () => {
 
       const img = new Image()
       img.src = canvasSrc
+      imageObjects.push(img)
+
       img.onload = () => {
         loadedImages++
-        imageObjects.push(img)
         if (loadedImages === facePartsOrder.length) {
           ctx.clearRect(0, 0, canvas.width, canvas.height)
           imageObjects.forEach((img) => {
@@ -378,7 +379,7 @@ const App: React.FC = () => {
           <div className="md:ml-4 w-[80vw] md:w-[45vw] md:max-w-[500px]">
             <h2 className="mb-4 text-xl font-bold">Customize Look</h2>
             <div className="flex flex-wrap gap-2 mb-8 text-sm text-sky-600">
-              {genres.map((genre) => {
+              {genreLabels.map((genre) => {
                 return (
                   <button
                     type="button"
