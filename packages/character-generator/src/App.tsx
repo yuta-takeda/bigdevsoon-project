@@ -423,12 +423,12 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="flex relative justify-center px-8 w-full h-screen">
+    <div className="flex relative justify-center px-8 my-8 w-full md:my-0 md:h-screen">
       <div className="flex flex-col justify-center max-w-[1000px]">
         <header className="text-2xl font-bold md:text-4xl">CHARACTER GENERATOR</header>
         <div className="flex flex-col justify-center mt-8 md:flex-row">
-          <div className="mr-4 mb-8 w-[80vw] h-[80vw] md:w-[45vw] md:h-[45vw] md:max-w-[500px] md:max-h-[500px]">
-            <canvas id="canvas" width={500} height={500} className="mb-6 w-full h-full"></canvas>
+          <div className="mr-4 mb-24 md:mb-0 md:h-full w-[80vw] h-[80vw] md:w-[45vw] md:max-w-[500px]">
+            <canvas id="canvas" width={500} height={500} className="mb-6 w-full"></canvas>
             <div className="flex gap-4 w-full justify-stretch">
               <button
                 type="button"
