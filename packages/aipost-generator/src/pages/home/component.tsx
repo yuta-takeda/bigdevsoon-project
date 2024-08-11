@@ -56,7 +56,7 @@ export const Component: React.FC<Props> = (props) => {
 
   return (
     <div className="flex flex-col items-center justify-content">
-      <div className="p-8 w-full max-w-screen-md bg-white rounded-lg shadow-md">
+      <form className="p-8 w-full max-w-screen-md bg-white rounded-lg shadow-md">
         <h1 className="mb-6 text-2xl font-bold text-center">Generate your post</h1>
         <div className="mb-4">
           <div className="mb-2 font-bold text-gray-700">Social platform</div>
@@ -68,6 +68,7 @@ export const Component: React.FC<Props> = (props) => {
                   onClick={() => setSelectedPlatform(platform.name)}
                   key={platform.name}
                   type="button"
+                  aria-label={platform.name}
                 >
                   <img
                     src={platform.icon}
@@ -154,7 +155,7 @@ export const Component: React.FC<Props> = (props) => {
             </button>
           </Link>
         </div>
-      </div>
+      </form>
       {!process.env.REACT_APP_OPENAI_API_KEY && (
         <footer className="mt-4">env REACT_APP_OPENAI_API_KEY is not set. So this app is running in demo mode.</footer>
       )}
