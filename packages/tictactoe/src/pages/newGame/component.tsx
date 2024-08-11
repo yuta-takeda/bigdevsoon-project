@@ -16,7 +16,7 @@ export const Component: React.FC<Props> = (props) => {
       <h1 className="my-8 text-xl font-bold">Pick player 1st mark</h1>
       <div className="flex flex-col justify-center items-center py-8 px-16 rounded-xl bg-slate-100">
         <div className="flex flex-row pb-8">
-          <label className="flex flex-col justify-center items-center">
+          <label className="flex flex-col justify-center items-center hover:opacity-75">
             <img src={xIcon} alt={'Select x player'} width={156} height={126} />
             <input
               type="radio"
@@ -25,9 +25,10 @@ export const Component: React.FC<Props> = (props) => {
               onChange={(event) => {
                 handleSetUserIcon(event)
               }}
+              aria-label="Select X"
             />
           </label>
-          <label className="flex flex-col justify-center items-center">
+          <label className="flex flex-col justify-center items-center hover:opacity-75">
             <img src={oIcon} alt={'Select o player'} width={156} height={126} />
             <input
               type="radio"
@@ -36,6 +37,7 @@ export const Component: React.FC<Props> = (props) => {
               onChange={(event) => {
                 handleSetUserIcon(event)
               }}
+              aria-label="Select O"
             />
           </label>
         </div>

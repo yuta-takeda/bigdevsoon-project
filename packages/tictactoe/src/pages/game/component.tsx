@@ -38,7 +38,7 @@ export const Component: React.FC<Props> = (props) => {
             <img src={oIcon} alt="o" className="w-[min(12vw, 64px)]" width="64" />
           </div>
           <div className="flex flex-row justify-center p-4 w-48 rounded-lg bg-slate-100">
-            <img src={currentPlayer === 'X' ? xIcon : oIcon} width="32" alt="currentPlayer" />
+            <img src={currentPlayer === 'X' ? xIcon : oIcon} width="32" alt={`Current Player is ${currentPlayer}`} />
             TURN
           </div>
         </div>
@@ -61,11 +61,12 @@ export const Component: React.FC<Props> = (props) => {
                     data-x={x}
                     data-y={y}
                     onClick={currentPlayer !== yourIcon || isGameOver ? undefined : (event) => handlePlace(event)}
+                    aria-label={`Place ${currentPlayer} at (${x}, ${y})`}
                   >
                     {cell === 'X' ?
                       <img
                         src={xIcon}
-                        alt="x"
+                        alt="X"
                         className="absolute w-[16vw] max-w-24"
                         style={{
                           top: '30%',
@@ -76,7 +77,7 @@ export const Component: React.FC<Props> = (props) => {
                     : cell === 'O' ?
                       <img
                         src={oIcon}
-                        alt="o"
+                        alt="O"
                         className="absolute w-[16vw] max-w-24"
                         style={{
                           top: '30%',
@@ -92,27 +93,31 @@ export const Component: React.FC<Props> = (props) => {
           })}
         </div>
         <div className="flex flex-row gap-4 p-4 w-full text-center">
-          <div className="p-4 w-full bg-lime-200 rounded-lg grow">
+          <div className="p-4 w-full bg-lime-200 rounded-lg grow" aria-label="X Player count">
             {yourIcon === 'X' ?
               <>
-                <p>X (YOU)</p>
-                <p>{yourCount}</p>
+                X (YOU)
+                <br />
+                {yourCount}
               </>
             : <>
-                <p>X (CPU)</p>
-                <p>{cpuCount}</p>
+                X (CPU)
+                <br />
+                {cpuCount}
               </>
             }
           </div>
-          <div className="p-4 w-full bg-orange-200 rounded-lg grow">
+          <div className="p-4 w-full bg-orange-200 rounded-lg grow" aria-label="O Player count">
             {yourIcon === 'O' ?
               <>
-                <p>O (YOU)</p>
-                <p>{yourCount}</p>
+                O (YOU)
+                <br />
+                {yourCount}
               </>
             : <>
-                <p>O (CPU)</p>
-                <p>{cpuCount}</p>
+                O (CPU)
+                <br />
+                {cpuCount}
               </>
             }
           </div>
@@ -121,7 +126,7 @@ export const Component: React.FC<Props> = (props) => {
           Reset Game
         </Link>
       </div>
-      <Modal isOpen={isGameOver} contentLabel="GameOver" style={modalStyles}>
+      <Modal isOpen={isGameOver} contentLabel="GameOver" style={modalStyles} ariaHideApp={false}>
         <div className="p-[4vw]">
           {isDraw ?
             <>
@@ -132,11 +137,11 @@ export const Component: React.FC<Props> = (props) => {
             </>
           : <>
               <p className={`m-2 text-center`}>{currentPlayer === yourIcon ? 'YOU' : 'CPU'} WON!</p>
-              <div className="flex flex-row justify-center items-center text-[4vw] my-[2vh]">
+              <div className="flex flex-row justify-center items-center text-[4vw] my-[2vh]" aria-label="winner">
                 <img
                   src={currentPlayer === 'X' ? xIcon : oIcon}
                   width="128"
-                  alt="currentPlayer"
+                  alt={currentPlayer}
                   className="mt-[2vw] w-[8vw] max-w-[128px]"
                 />
                 <span className={yourIcon === 'X' ? 'text-cyan-400' : 'text-yellow-400'}>WON THIS ROUND</span>

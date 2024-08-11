@@ -5,16 +5,24 @@ import { Component } from './component'
 export type Icon = 'X' | 'O'
 export type FieldIcon = Icon | null
 
-export const Container: React.FC = () => {
+interface Props {
+  initialField?: FieldIcon[][]
+}
+
+export const Container: React.FC<Props> = (props = {}) => {
   const [searchParams] = useSearchParams()
+  const initialField =
+    props.initialField ||
+    ([
+      [null, null, null],
+      [null, null, null],
+      [null, null, null],
+    ] as FieldIcon[][])
+
   const player = searchParams.get('player') as Icon
   const [currentPlayer, setCurrentPlayer] = useState<Icon>(player)
   const fieldSize = 3
-  const [field, setField] = useState<FieldIcon[][]>([
-    [null, null, null],
-    [null, null, null],
-    [null, null, null],
-  ])
+  const [field, setField] = useState<FieldIcon[][]>(initialField)
   const [yourCount, setYourCount] = useState<number>(0)
   const [cpuCount, setCpuCount] = useState<number>(0)
   const [isGameOver, setIsGameOver] = useState<boolean>(false)
@@ -61,7 +69,6 @@ export const Container: React.FC = () => {
         }
       })
     })
-    console.log(newField)
     setField(newField)
 
     setYourCount(currentPlayer === player ? yourCount + 1 : yourCount)
