@@ -56,7 +56,7 @@ export const Component: React.FC<Props> = (props) => {
                   style={{ paddingBottom: '100%' }}
                   key={y * 3 + x}
                 >
-                  <div
+                  <button
                     className="absolute inset-0 m-auto w-full h-full handlePlace"
                     data-x={x}
                     data-y={y}
@@ -85,7 +85,7 @@ export const Component: React.FC<Props> = (props) => {
                         }}
                       />
                     : null}
-                  </div>
+                  </button>
                 </div>
               )
             })

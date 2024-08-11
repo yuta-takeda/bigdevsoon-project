@@ -5,7 +5,7 @@ import logo from './assets/logo.svg'
 export const HomeComponent: React.FC = () => {
   return (
     <>
-      <img src={logo} alt={logo} width={200} className="pb-12" />
+      <img src={logo} alt={logo} width={200} height={145} className="pb-12" />
       <h1 className="m-4 font-sans text-6xl font-black">Tic Tac Toe</h1>
       <h2 className="m-4 text-lg text-center">
         Dive into the excitement now and experience
