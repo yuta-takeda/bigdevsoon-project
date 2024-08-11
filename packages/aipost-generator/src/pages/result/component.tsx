@@ -17,21 +17,23 @@ export const Component: React.FC<Props> = (props) => {
       <div className="flex justify-between p-4 rounded-md border-2 border-solid">
         <TypingText text={generatedMessage} />
         <div className="flex justify-end items-start w-32 grow-0">
-          <div
+          <button
             className="p-1 rounded-md border-2 border-solid cursor-pointer hover:bg-gray-200"
             onClick={handleCopyText}
+            aria-label="Copy to clipboard"
           >
             <img width="20" height="20" src="https://img.icons8.com/material-outlined/24/copy.png" alt="copy" />
-          </div>
+          </button>
         </div>
       </div>
       <div className="flex flex-row gap-4 mt-8">
-        <Link to={'/'} className={`py-2 w-full bg-white border-solid border-2 rounded-md text-center`}>
-          <button>← Back to Generator</button>
+        <Link to={'/'} className={`py-2 w-full bg-white border-solid border-2 rounded-md text-center hover:opacity-50`}>
+          ← Back to Generator
         </Link>
         <button
-          className={`py-2 w-full text-white bg-gray-500 rounded-md flex flex-row items-center justify-center gap-2`}
+          className={`py-2 w-full text-white bg-gray-500 rounded-md flex flex-row items-center justify-center gap-2 hover:opacity-50`}
           onClick={handleRegenerate}
+          aria-label="Regenerate message"
         >
           <img
             src={'https://img.icons8.com/ios-filled/50/000000/available-updates.png'}

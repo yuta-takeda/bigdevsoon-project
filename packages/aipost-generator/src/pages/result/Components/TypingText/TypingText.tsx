@@ -32,9 +32,11 @@ export const TypingText: React.FC<Props> = (props) => {
 
   return (
     <div>
-      <p className={`${typingText.length >= text.length ? '' : "after:content-['|'] after:animate-blink after:pl-1"}`}>
+      <article
+        className={`${typingText.length >= text.length ? '' : "after:content-['|'] after:animate-blink after:pl-1"}`}
+      >
         {text ? typingText : 'Generating...'}
-      </p>
+      </article>
     </div>
   )
 }
