@@ -1,12 +1,35 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import type { SocialPlatform } from './container'
+
+export interface SocialPlatform {
+  name: string
+  icon: string
+}
+
+const socialPlatforms = [
+  {
+    name: 'Facebook',
+    icon: 'https://img.icons8.com/ios-filled/50/000000/facebook-new.png',
+  },
+  {
+    name: 'Twitter',
+    icon: 'https://img.icons8.com/ios-filled/50/000000/twitter.png',
+  },
+  {
+    name: 'Reddit',
+    icon: 'https://img.icons8.com/ios-filled/50/000000/reddit.png',
+  },
+  {
+    name: 'LinkedIn',
+    icon: 'https://img.icons8.com/ios-filled/50/000000/linkedin.png',
+  },
+] as SocialPlatform[]
+
+const maxMessageLength = 200
+const toneOfVoices = ['Polite', 'Funny', 'Friendly', 'Informal', 'Serious', 'Optimistic', 'Motivational']
+const postStyles = ['Work', 'Opinion', 'Case study', 'Story', 'Tutorial']
 
 interface Props {
-  socialPlatforms: SocialPlatform[]
-  maxMessageLength: number
-  toneOfVoices: string[]
-  postStyles: string[]
   setSelectedPlatform: (platform: string) => void
   selectedPlatform: string
   setMessage: (message: string) => void
@@ -20,10 +43,6 @@ interface Props {
 
 export const Component: React.FC<Props> = (props) => {
   const {
-    socialPlatforms,
-    maxMessageLength,
-    toneOfVoices,
-    postStyles,
     setSelectedPlatform,
     selectedPlatform,
     setMessage,

@@ -9,27 +9,6 @@ const component = (isPostable: () => boolean) => {
   return (
     <BrowserRouter>
       <Component
-        socialPlatforms={[
-          {
-            name: 'Facebook',
-            icon: 'https://img.icons8.com/ios-filled/50/000000/facebook-new.png',
-          },
-          {
-            name: 'Twitter',
-            icon: 'https://img.icons8.com/ios-filled/50/000000/twitter.png',
-          },
-          {
-            name: 'Reddit',
-            icon: 'https://img.icons8.com/ios-filled/50/000000/reddit.png',
-          },
-          {
-            name: 'LinkedIn',
-            icon: 'https://img.icons8.com/ios-filled/50/000000/linkedin.png',
-          },
-        ]}
-        maxMessageLength={200}
-        toneOfVoices={['Polite', 'Funny', 'Friendly', 'Informal', 'Serious', 'Optimistic', 'Motivational']}
-        postStyles={['Work', 'Opinion', 'Case study', 'Story', 'Tutorial']}
         setSelectedPlatform={mockFn}
         selectedPlatform={'Facebook'}
         setMessage={mockFn}
