@@ -124,14 +124,15 @@ const App: React.FC = () => {
               Food For You
             </h2>
             <p className="pb-4">Created for lovers of healthy, delicious and non-obvious food.</p>
-            <button type="button" className="py-2 px-4 bg-orange-500 rounded-full hover:text-white hover:bg-orange-600">
-              <a href="#menu">
-                <div className="flex items-center">
-                  Check menu
-                  <img src={checkMenuIcon} alt={'check menu icon'} className="ml-2" width={24} height={24} />
-                </div>
+            <div className="flex">
+              <a
+                href="#menu"
+                className="flex py-2 px-4 bg-orange-500 rounded-full hover:text-white hover:bg-orange-600"
+              >
+                <span>Check menu</span>
+                <img src={checkMenuIcon} alt={'check menu icon'} className="ml-2" width={24} height={24} />
               </a>
-            </button>
+            </div>
           </div>
           <div className="w-1/4 h-full bg-green-700 sm:w-1/3"></div>
         </div>
