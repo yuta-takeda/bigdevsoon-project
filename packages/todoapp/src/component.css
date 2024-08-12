@@ -63,6 +63,8 @@ body {
 }
 
 .toggle {
+  background: transparent;
+  border: none;
 }
 
 .background {
@@ -142,6 +144,7 @@ body {
 }
 
 .todo {
+  display: inline-block;
   border: 1px solid var(--text-color-secondary);
   border-radius: 8px;
   margin: 1em;
@@ -153,19 +156,24 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 24px;
+  width: 95%;
+  height: 54px;
+  font-size: 1em;
+  background-color: var(--todo-bg-color);
 }
 
-.todo:hover {
+.todo:hover,
+.todo:focus {
   opacity: 0.6;
 }
 
 .deleteTodo {
   display: none;
-}
-
-.deleteTodo {
   filter: var(--svg-filter);
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: none;
 }
 
 .deleteTodo:hover {

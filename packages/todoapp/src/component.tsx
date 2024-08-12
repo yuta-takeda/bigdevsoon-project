@@ -35,9 +35,9 @@ export const TodoComponent: React.FC<TodoProps> = ({
     <div className="App">
       <div className="header">
         <div className="title">TODO</div>
-        <div className="toggle" onClick={() => toggleTheme()} role="button" aria-label="toggle-theme">
+        <button className="toggle" onClick={() => toggleTheme()} aria-label="toggle-theme">
           <img src={isDarkMode ? lightModeIcon : darkModeIcon} alt={'モード切替'} />
-        </div>
+        </button>
       </div>
       <div className="background">
         <div className="addTodo">
@@ -59,29 +59,31 @@ export const TodoComponent: React.FC<TodoProps> = ({
           <div className="todoList">
             {todos.map((todo) => {
               return (
-                <div
+                <button
                   className="todo"
                   key={todo.id}
                   onMouseEnter={(e) => showDeleteButton(e)}
                   onMouseLeave={(e) => hideDeleteButton(e)}
                   onClick={() => toggleCompleted(todo.id)}
                   aria-label="todo"
+                  type="button"
                 >
-                  <div className="todoLabel">
-                    <input type="checkbox" checked={todo.completed} readOnly />
+                  <label className="todoLabel">
+                    <input type="checkbox" checked={todo.completed} tabIndex={-1} readOnly />
                     <div className={todo.completed ? 'todoTextCompleted' : 'todoText'}>{todo.text}</div>
+                  </label>
+                  {/* FIXME: 本当は button 要素にしたい */}
+                  <div className="deleteTodo" onClick={(e) => deleteTodo(e, todo.id)}>
+                    <img
+                      src={deleteIcon}
+                      height="24"
+                      width="24"
+                      alt="delete-todo"
+                      role="button"
+                      aria-label="delete-todo"
+                    />
                   </div>
-                  <img
-                    src={deleteIcon}
-                    className="deleteTodo"
-                    height="24"
-                    width="24"
-                    alt="delete-todo"
-                    aria-label="delete-todo"
-                    role="button"
-                    onClick={(e) => deleteTodo(e, todo.id)}
-                  />
-                </div>
+                </button>
               )
             })}
             <footer className="footer">
