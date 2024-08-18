@@ -73,18 +73,25 @@ const App: React.FC = () => {
     }
   }, [])
 
+  const title =
+    gameStatus === 'cpuTurn' ? 'WATCH CLOSELY'
+    : gameStatus === 'playerTurn' ? 'YOUR TURN'
+    : 'COLOR MEMORY'
+
   return (
     <>
       <div className="flex relative flex-col justify-center items-center w-screen h-screen bg-gray-800">
-        <h1 className="mb-8 text-4xl font-semibold text-white">COLOR MEMORY</h1>
+        <h1 className="mb-8 text-4xl font-semibold text-white">{title}</h1>
         <Circle />
-        <button
-          type="button"
-          className="py-2 mt-8 bg-orange-400 rounded-lg w-[500px] shadow-[0_5px_0_rgb(217,119,6)] hover:translate-y-1 hover:bg-orange-300"
-          onClick={startCountDown}
-        >
-          <span className="font-semibold">NEW GAME</span>
-        </button>
+        {gameStatus === 'idle' && (
+          <button
+            type="button"
+            className="py-2 mt-8 bg-orange-400 rounded-lg w-[500px] shadow-[0_5px_0_rgb(217,119,6)] hover:translate-y-1 hover:bg-orange-300"
+            onClick={startCountDown}
+          >
+            <span className="font-semibold">NEW GAME</span>
+          </button>
+        )}
         <div className="flex absolute top-6 left-6 justify-center items-center bg-gray-600 rounded-lg w-[48px] h-[48px]">
           <img src={gameRuleIcon} alt="show game rule" width={24} height={24} />
         </div>
