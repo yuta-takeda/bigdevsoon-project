@@ -14,8 +14,15 @@ const Circle: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <div className="flex justify-center items-center w-screen h-screen bg-gray-800">
+    <div className="flex flex-col justify-center items-center w-screen h-screen bg-gray-800">
+      <h1 className="mb-8 text-4xl font-semibold text-white">COLOR MEMORY</h1>
       <Circle />
+      <button
+        type="button"
+        className="py-2 mt-8 bg-orange-400 rounded-lg w-[500px] shadow-[0_5px_0_rgb(217,119,6)] hover:translate-y-1 hover:bg-orange-300"
+      >
+        <span className="font-semibold">NEW GAME</span>
+      </button>
     </div>
   )
 }
