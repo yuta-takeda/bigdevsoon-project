@@ -4,17 +4,8 @@ import Modal from 'react-modal'
 import gameRuleIcon from './assets/icons/game-rules-icon.svg'
 import soundOnIcon from './assets/icons/sound-on-icon.svg'
 
-const Circle: React.FC = () => {
-  return (
-    <div className="relative bg-gray-600 rounded-full w-[500px] h-[500px]">
-      <div className="absolute bg-green-300 rounded-tl-full w-[205px] h-[205px] top-[30px] left-[30px]"></div>
-      <div className="absolute bg-red-500 rounded-tr-full w-[205px] h-[205px] top-[30px] right-[30px]"></div>
-      <div className="absolute bg-amber-300 rounded-bl-full w-[205px] h-[205px] bottom-[30px] left-[30px]"></div>
-      <div className="absolute rounded-br-full bg-sky-300 w-[205px] h-[205px] bottom-[30px] right-[30px]"></div>
-      <div className="absolute bg-gray-600 rounded-full w-[200px] h-[200px] top-[150px] left-[150px]"></div>
-    </div>
-  )
-}
+type GameStatus = 'idle' | 'countdown' | 'cpuTurn' | 'playerTurn' | 'gameOver'
+type Colors = 'green' | 'red' | 'yellow' | 'blue'
 
 const modalStyles = {
   content: {
@@ -37,17 +28,15 @@ const modalStyles = {
 const App: React.FC = () => {
   const [score, setScore] = React.useState(0)
   const [bestScore, setBestScore] = React.useState(0)
-  const [level, setLevel] = React.useState(1)
-  const [colorSequence, setColorSequence] = React.useState([])
+  const [level, setLevel] = React.useState(0)
+  const [colorSequence, setColorSequence] = React.useState<Colors[]>([])
+  const [currentColor, setCurrentColor] = React.useState<Colors | null>(null)
   const [gameStatus, setGameStatus] = React.useState<GameStatus>('idle')
   const [countDownTime, setCountDownTime] = React.useState(3)
   const intervalRef = React.useRef<NodeJS.Timer | undefined>(undefined)
 
-  type GameStatus = 'idle' | 'countdown' | 'cpuTurn' | 'playerTurn' | 'gameOver'
-
   const startCountDown = () => {
     setScore(0)
-    setLevel(1)
     setColorSequence([])
     setGameStatus('countdown')
     setCountDownTime(3)
@@ -58,11 +47,42 @@ const App: React.FC = () => {
           clearInterval(intervalRef.current)
           intervalRef.current = undefined
           setGameStatus('cpuTurn')
+          setLevel((prevLevel) => prevLevel + 1)
         }
 
         return prevCount - 1
       })
     }, 1000)
+  }
+
+  const startCpuTurn = () => {
+    console.log(level)
+    const newColorSequence = [...Array(level)].map(() => {
+      const randomIndex = Math.floor(Math.random() * 4)
+      console.log(['green', 'red', 'yellow', 'blue'][randomIndex] as Colors)
+      return ['green', 'red', 'yellow', 'blue'][randomIndex] as Colors
+    })
+
+    setColorSequence(newColorSequence)
+
+    let colorCount = 0
+
+    const color = newColorSequence[colorCount]
+    setCurrentColor(color)
+    colorCount += 1
+
+    intervalRef.current = setInterval(() => {
+      if (colorCount > newColorSequence.length) {
+        setGameStatus('playerTurn')
+      } else {
+        setCurrentColor(null)
+        setTimeout(() => {
+          const color = newColorSequence[colorCount]
+          setCurrentColor(color)
+          colorCount += 1
+        }, 500)
+      }
+    }, 2000)
   }
 
   React.useEffect(() => {
@@ -73,10 +93,36 @@ const App: React.FC = () => {
     }
   }, [])
 
+  React.useEffect(() => {
+    if (level > 0) {
+      startCpuTurn()
+    }
+  }, [level])
+
   const title =
     gameStatus === 'cpuTurn' ? 'WATCH CLOSELY'
     : gameStatus === 'playerTurn' ? 'YOUR TURN'
     : 'COLOR MEMORY'
+
+  const Circle: React.FC = () => {
+    return (
+      <div className="relative bg-gray-600 rounded-full w-[500px] h-[500px]">
+        <button
+          className={`absolute ${gameStatus === 'playerTurn' && 'hover:bg-[color:hsl(120,100,50)]'} ${currentColor === 'green' ? 'bg-[color:hsl(120,100,50)]' : 'bg-[color:hsl(120,30,50)]'} rounded-tl-full w-[205px] h-[205px] top-[30px] left-[30px]`}
+        ></button>
+        <button
+          className={`absolute ${gameStatus === 'playerTurn' && 'hover:bg-[color:hsl(0,100,50)]'} ${currentColor === 'red' ? 'bg-[color:hsl(0,100,50)]' : 'bg-[color:hsl(0,30,50)]'} rounded-tr-full w-[205px] h-[205px] top-[30px] right-[30px]`}
+        ></button>
+        <button
+          className={`absolute ${gameStatus === 'playerTurn' && 'hover:bg-[color:hsl(60,100,50)]'} ${currentColor === 'yellow' ? 'bg-[color:hsl(60,100,50)]' : 'bg-[color:hsl(60,30,50)]'} rounded-bl-full w-[205px] h-[205px] bottom-[30px] left-[30px]`}
+        ></button>
+        <button
+          className={`absolute rounded-br-full ${gameStatus === 'playerTurn' && 'hover:bg-[color:hsl(200,100,50)]'}  ${currentColor === 'blue' ? 'bg-[color:hsl(200,100,50)]' : 'bg-[color:hsl(200,30,50)]'} w-[205px] h-[205px] bottom-[30px] right-[30px]`}
+        ></button>
+        <div className="absolute bg-gray-600 rounded-full w-[200px] h-[200px] top-[150px] left-[150px]"></div>
+      </div>
+    )
+  }
 
   return (
     <>
