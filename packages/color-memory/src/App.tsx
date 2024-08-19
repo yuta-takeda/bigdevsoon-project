@@ -146,30 +146,57 @@ const App: React.FC = () => {
     : gameStatus === 'levelClear' ? `LEVEL ${level} CLEAR!`
     : 'COLOR MEMORY'
 
-  const Circle: React.FC = () => {
+  interface CircleProps {
+    size: 'small' | 'large'
+  }
+
+  const Circle: React.FC<CircleProps> = (props) => {
+    const { size } = props
+
+    const circleSize = {
+      small: {
+        circle: 'w-[500px] h-[500px]',
+        colorButton: 'w-[205px] h-[205px]',
+        centerCircle: 'w-[200px] h-[200px] top-[150px] left-[150px]',
+        topBorder: 'top-[30px]',
+        bottomBorder: 'bottom-[30px]',
+        leftBorder: 'left-[30px]',
+        rightBorder: 'right-[30px]',
+      },
+      large: {
+        circle: 'w-[500px] h-[500px]',
+        colorButton: 'w-[205px] h-[205px]',
+        centerCircle: 'w-[200px] h-[200px] top-[150px] left-[150px]',
+        topBorder: 'top-[30px]',
+        bottomBorder: 'bottom-[30px]',
+        leftBorder: 'left-[30px]',
+        rightBorder: 'right-[30px]',
+      },
+    }
+
     return (
-      <div className="relative bg-gray-600 rounded-full w-[500px] h-[500px]">
+      <div className={`relative bg-gray-600 rounded-full ${circleSize[size].circle}`}>
         <button
-          className={`absolute ${gameStatus === 'playerTurn' && 'hover:bg-[color:hsl(120,100,50)]'} ${currentColor === 'green' ? 'bg-[color:hsl(120,100,50)]' : 'bg-[color:hsl(120,30,50)]'} rounded-tl-full w-[205px] h-[205px] top-[30px] left-[30px]`}
+          className={`absolute ${gameStatus === 'playerTurn' && 'hover:bg-[color:hsl(120,100,50)]'} ${currentColor === 'green' ? 'bg-[color:hsl(120,100,50)]' : 'bg-[color:hsl(120,30,50)]'} rounded-tl-full ${circleSize[size].colorButton} ${circleSize[size].topBorder} ${circleSize[size].leftBorder}`}
           data-color="green"
           onClick={handlePlayerTurn}
         ></button>
         <button
-          className={`absolute ${gameStatus === 'playerTurn' && 'hover:bg-[color:hsl(0,100,50)]'} ${currentColor === 'red' ? 'bg-[color:hsl(0,100,50)]' : 'bg-[color:hsl(0,30,50)]'} rounded-tr-full w-[205px] h-[205px] top-[30px] right-[30px]`}
+          className={`absolute ${gameStatus === 'playerTurn' && 'hover:bg-[color:hsl(0,100,50)]'} ${currentColor === 'red' ? 'bg-[color:hsl(0,100,50)]' : 'bg-[color:hsl(0,30,50)]'} rounded-tr-full ${circleSize[size].colorButton} ${circleSize[size].topBorder} ${circleSize[size].rightBorder}`}
           data-color="red"
           onClick={handlePlayerTurn}
         ></button>
         <button
-          className={`absolute ${gameStatus === 'playerTurn' && 'hover:bg-[color:hsl(60,100,50)]'} ${currentColor === 'yellow' ? 'bg-[color:hsl(60,100,50)]' : 'bg-[color:hsl(60,30,50)]'} rounded-bl-full w-[205px] h-[205px] bottom-[30px] left-[30px]`}
+          className={`absolute ${gameStatus === 'playerTurn' && 'hover:bg-[color:hsl(60,100,50)]'} ${currentColor === 'yellow' ? 'bg-[color:hsl(60,100,50)]' : 'bg-[color:hsl(60,30,50)]'} rounded-bl-full ${circleSize[size].colorButton} ${circleSize[size].bottomBorder} ${circleSize[size].leftBorder}`}
           data-color="yellow"
           onClick={handlePlayerTurn}
         ></button>
         <button
-          className={`absolute rounded-br-full ${gameStatus === 'playerTurn' && 'hover:bg-[color:hsl(200,100,50)]'}  ${currentColor === 'blue' ? 'bg-[color:hsl(200,100,50)]' : 'bg-[color:hsl(200,30,50)]'} w-[205px] h-[205px] bottom-[30px] right-[30px]`}
+          className={`absolute rounded-br-full ${gameStatus === 'playerTurn' && 'hover:bg-[color:hsl(200,100,50)]'}  ${currentColor === 'blue' ? 'bg-[color:hsl(200,100,50)]' : 'bg-[color:hsl(200,30,50)]'} ${circleSize[size].colorButton} ${circleSize[size].bottomBorder} ${circleSize[size].rightBorder}`}
           data-color="blue"
           onClick={handlePlayerTurn}
         ></button>
-        <div className="absolute bg-gray-600 rounded-full w-[200px] h-[200px] top-[150px] left-[150px]"></div>
+        <div className={`absolute bg-gray-600 rounded-full ${circleSize[size].centerCircle}`}></div>
         {gameStatus}
       </div>
     )
@@ -178,7 +205,7 @@ const App: React.FC = () => {
   return (
     <div className="flex relative flex-col justify-center items-center w-screen h-screen bg-gray-800">
       <h1 className="mb-8 text-4xl font-semibold text-white">{title}</h1>
-      <Circle />
+      <Circle size={'large'} />
       {gameStatus === 'idle' || gameStatus === 'levelClear' ?
         <button
           type="button"
