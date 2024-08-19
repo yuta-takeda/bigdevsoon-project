@@ -179,32 +179,30 @@ const App: React.FC = () => {
   }
 
   return (
-    <>
-      <div className="flex relative flex-col justify-center items-center w-screen h-screen bg-gray-800">
-        <h1 className="mb-8 text-4xl font-semibold text-white">{title}</h1>
-        <Circle />
-        {gameStatus === 'idle' || gameStatus === 'levelClear' ?
-          <button
-            type="button"
-            className="py-2 mt-8 bg-orange-400 rounded-lg w-[500px] shadow-[0_5px_0_rgb(217,119,6)] hover:bg-orange-300"
-            onClick={prepareGame}
-          >
-            <span className="font-semibold">{gameStatus === 'idle' ? 'NEW GAME' : 'NEXT LEVEL'}</span>
-          </button>
-        : <div className="py-2 mt-8 text-2xl font-semibold text-white">SCORE: {score}</div>}
-        <div className="flex absolute top-6 left-6 justify-center items-center bg-gray-600 rounded-lg w-[48px] h-[48px]">
-          <img src={gameRuleIcon} alt="show game rule" width={24} height={24} />
-        </div>
-        <div className="flex absolute top-6 right-6 justify-center items-center bg-gray-600 rounded-lg w-[48px] h-[48px]">
-          <img src={soundOnIcon} alt="turn off sound" width={24} height={24} />
-        </div>
+    <div className="flex relative flex-col justify-center items-center w-screen h-screen bg-gray-800">
+      <h1 className="mb-8 text-4xl font-semibold text-white">{title}</h1>
+      <Circle />
+      {gameStatus === 'idle' || gameStatus === 'levelClear' ?
+        <button
+          type="button"
+          className="py-2 mt-8 bg-orange-400 rounded-lg w-[500px] shadow-[0_5px_0_rgb(217,119,6)] hover:bg-orange-300"
+          onClick={prepareGame}
+        >
+          <span className="font-semibold">{gameStatus === 'idle' ? 'NEW GAME' : 'NEXT LEVEL'}</span>
+        </button>
+      : <div className="py-2 mt-8 text-2xl font-semibold text-white">SCORE: {score}</div>}
+      <div className="flex absolute top-6 left-6 justify-center items-center bg-gray-600 rounded-lg w-[48px] h-[48px]">
+        <img src={gameRuleIcon} alt="show game rule" width={24} height={24} />
       </div>
-      <Modal isOpen={gameStatus === 'countdown'} contentLabel="Countdown" style={modalStyles}>
+      <div className="flex absolute top-6 right-6 justify-center items-center bg-gray-600 rounded-lg w-[48px] h-[48px]">
+        <img src={soundOnIcon} alt="turn off sound" width={24} height={24} />
+      </div>
+      <Modal isOpen={gameStatus === 'countdown'} contentLabel="Countdown" style={modalStyles} ariaHideApp={false}>
         <div className="flex justify-center items-center w-full h-full">
           <div className="text-5xl font-bold text-white h-128">{countDownTime === 0 ? 'START' : countDownTime}</div>
         </div>
       </Modal>
-      <Modal isOpen={gameStatus === 'gameOver'} contentLabel="GameOver" style={gameOverModalStyles}>
+      <Modal isOpen={gameStatus === 'gameOver'} contentLabel="GameOver" style={gameOverModalStyles} ariaHideApp={false}>
         <div className="flex flex-col justify-center items-center w-full h-full">
           <div className="text-5xl font-bold text-white">GAME OVER</div>
           <div className="flex gap-8">
@@ -225,7 +223,7 @@ const App: React.FC = () => {
           </div>
         </div>
       </Modal>
-    </>
+    </div>
   )
 }
 
