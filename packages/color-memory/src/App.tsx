@@ -2,7 +2,13 @@ import React from 'react'
 import Modal from 'react-modal'
 
 import gameRuleIcon from './assets/icons/game-rules-icon.svg'
+import soundOffIcon from './assets/icons/sound-off-icon.svg'
 import soundOnIcon from './assets/icons/sound-on-icon.svg'
+
+import colorSignalSound from './assets/sounds/color-signal.mp3'
+import levelClearSound from './assets/sounds/level-clear.mp3'
+import rightAnswerSound from './assets/sounds/right-answer.mp3'
+import wrongAnswerSound from './assets/sounds/wrong-answer.mp3'
 
 type GameStatus = 'idle' | 'countdown' | 'cpuTurn' | 'playerTurn' | 'levelClear' | 'gameOver'
 type Colors = 'green' | 'red' | 'yellow' | 'blue'
@@ -52,7 +58,12 @@ const App: React.FC = () => {
   const [gameStatus, setGameStatus] = React.useState<GameStatus>('idle')
   const [countDownTime, setCountDownTime] = React.useState(3)
   const [showGameRule, setShowGameRule] = React.useState(false)
+  const [soundOn, setSoundOn] = React.useState(false)
   const intervalRef = React.useRef<NodeJS.Timer | undefined>(undefined)
+  const colorSignal = new Audio(colorSignalSound)
+  const wrongAnswer = new Audio(wrongAnswerSound)
+  const rightAnswer = new Audio(rightAnswerSound)
+  const levelClear = new Audio(levelClearSound)
 
   const prepareGame = () => {
     setColorSequence([])
@@ -86,10 +97,12 @@ const App: React.FC = () => {
 
     const color = newColorSequence[colorCount]
     setCurrentColor(color)
+    playSound(colorSignal)
     colorCount += 1
 
     intervalRef.current = setInterval(() => {
-      if (colorCount > newColorSequence.length) {
+      if (colorCount >= newColorSequence.length) {
+        setCurrentColor(null)
         clearInterval(intervalRef.current)
         setGameStatus('playerTurn')
       } else {
@@ -97,6 +110,7 @@ const App: React.FC = () => {
         setTimeout(() => {
           const color = newColorSequence[colorCount]
           setCurrentColor(color)
+          playSound(colorSignal)
           colorCount += 1
         }, 500)
       }
@@ -113,14 +127,17 @@ const App: React.FC = () => {
 
     if (selectedColor === colorSequence[0] && colorSequence.length > 1) {
       console.log('correct')
+      playSound(rightAnswer)
       setColorSequence((prevColorSequence) => prevColorSequence.slice(1))
       setScore((prevScore) => prevScore + 1)
     } else if (selectedColor === colorSequence[0]) {
       console.log('clear')
+      playSound(levelClear)
       setScore((prevScore) => prevScore + 1)
       setGameStatus('levelClear')
     } else {
       console.log('wrong')
+      playSound(wrongAnswer)
       setBestScore((prevBestScore) => Math.max(prevBestScore, score))
       setGameStatus('gameOver')
     }
@@ -137,6 +154,17 @@ const App: React.FC = () => {
 
   const handleShowGameRule = () => {
     setShowGameRule((prevStatus) => !prevStatus)
+  }
+
+  const playSound = (sound: HTMLAudioElement) => {
+    if (soundOn) {
+      sound.volume = 0.5
+      sound.play()
+    }
+  }
+
+  const handleSoundOn = () => {
+    setSoundOn((prevStatus) => !prevStatus)
   }
 
   React.useEffect(() => {
@@ -226,9 +254,14 @@ const App: React.FC = () => {
       >
         <img src={gameRuleIcon} alt="show game rule" width={24} height={24} />
       </button>
-      <div className="flex absolute top-6 right-6 justify-center items-center bg-gray-600 rounded-lg w-[48px] h-[48px]">
-        <img src={soundOnIcon} alt="turn off sound" width={24} height={24} />
-      </div>
+      <button
+        className="flex absolute top-6 right-6 justify-center items-center bg-gray-600 rounded-lg w-[48px] h-[48px]"
+        onClick={handleSoundOn}
+      >
+        {soundOn ?
+          <img src={soundOnIcon} alt="turn off sound" width={24} height={24} />
+        : <img src={soundOffIcon} alt="turn on sound" width={24} height={24} />}
+      </button>
       {bestScore > 0 && (
         <div className="flex absolute bottom-6 left-6 items-center justify-left">
           <span className="text-xl font-bold text-white">BEST SCORE: {bestScore}</span>
