@@ -72,11 +72,6 @@ const App: React.FC = () => {
     }, 1000)
   }
 
-  const retryGame = () => {
-    setLevel(0)
-    prepareGame()
-  }
-
   const startCpuTurn = () => {
     const newColorSequence = [...Array(level)].map(() => {
       const randomIndex = Math.floor(Math.random() * 4)
@@ -130,8 +125,9 @@ const App: React.FC = () => {
     }
   }
 
-  const quitGame = () => {
-    setGameStatus('idle')
+  const quitGame = (e: React.MouseEvent<HTMLButtonElement>, retry: boolean) => {
+    retry ? prepareGame() : setGameStatus('idle')
+
     setScore(0)
     setLevel(0)
     setColorSequence([])
@@ -215,14 +211,14 @@ const App: React.FC = () => {
             <button
               type="button"
               className="py-2 mt-8 w-32 bg-gray-400 rounded-lg w-128 shadow-[0_5px_0_#6b7280] hover:bg-gray-300"
-              onClick={quitGame}
+              onClick={(e) => quitGame(e, false)}
             >
               <span className="font-semibold">QUIT</span>
             </button>
             <button
               type="button"
               className="py-2 mt-8 w-32 bg-orange-400 rounded-lg w-128 shadow-[0_5px_0_rgb(217,119,6)] hover:bg-orange-300"
-              onClick={retryGame}
+              onClick={(e) => quitGame(e, true)}
             >
               <span className="font-semibold">TRY AGAIN</span>
             </button>
