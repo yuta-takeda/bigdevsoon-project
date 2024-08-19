@@ -33,7 +33,7 @@ const gameOverModalStyles = {
     bottom: 'auto',
     transform: 'translate(-50%, -50%)',
     width: '600px',
-    height: '25%',
+    height: '35%',
     backgroundColor: '#374151', // gray-700
     border: 'none',
     overflow: 'hidden',
@@ -51,6 +51,7 @@ const App: React.FC = () => {
   const [currentColor, setCurrentColor] = React.useState<Colors | null>(null)
   const [gameStatus, setGameStatus] = React.useState<GameStatus>('idle')
   const [countDownTime, setCountDownTime] = React.useState(3)
+  const [showGameRule, setShowGameRule] = React.useState(false)
   const intervalRef = React.useRef<NodeJS.Timer | undefined>(undefined)
 
   const prepareGame = () => {
@@ -134,6 +135,10 @@ const App: React.FC = () => {
     setCurrentColor(null)
   }
 
+  const handleShowGameRule = () => {
+    setShowGameRule((prevStatus) => !prevStatus)
+  }
+
   React.useEffect(() => {
     if (level > 0) {
       startCpuTurn()
@@ -148,20 +153,21 @@ const App: React.FC = () => {
 
   interface CircleProps {
     size: 'small' | 'large'
+    highlightColor?: Colors
   }
 
   const Circle: React.FC<CircleProps> = (props) => {
-    const { size } = props
+    const { size, highlightColor } = props
 
     const circleSize = {
       small: {
-        circle: 'w-[500px] h-[500px]',
-        colorButton: 'w-[205px] h-[205px]',
-        centerCircle: 'w-[200px] h-[200px] top-[150px] left-[150px]',
-        topBorder: 'top-[30px]',
-        bottomBorder: 'bottom-[30px]',
-        leftBorder: 'left-[30px]',
-        rightBorder: 'right-[30px]',
+        circle: 'w-[100px] h-[100px]',
+        colorButton: 'w-[35px] h-[35px]',
+        centerCircle: 'w-[40px] h-[40px] top-[30px] left-[30px]',
+        topBorder: 'top-[10px]',
+        bottomBorder: 'bottom-[10px]',
+        leftBorder: 'left-[10px]',
+        rightBorder: 'right-[10px]',
       },
       large: {
         circle: 'w-[500px] h-[500px]',
@@ -177,27 +183,26 @@ const App: React.FC = () => {
     return (
       <div className={`relative bg-gray-600 rounded-full ${circleSize[size].circle}`}>
         <button
-          className={`absolute ${gameStatus === 'playerTurn' && 'hover:bg-[color:hsl(120,100,50)]'} ${currentColor === 'green' ? 'bg-[color:hsl(120,100,50)]' : 'bg-[color:hsl(120,30,50)]'} rounded-tl-full ${circleSize[size].colorButton} ${circleSize[size].topBorder} ${circleSize[size].leftBorder}`}
+          className={`absolute ${gameStatus === 'playerTurn' && 'hover:bg-[color:hsl(120,100,50)]'} ${currentColor === 'green' || highlightColor === 'green' ? 'bg-[color:hsl(120,100,50)]' : 'bg-[color:hsl(120,30,50)]'} rounded-tl-full ${circleSize[size].colorButton} ${circleSize[size].topBorder} ${circleSize[size].leftBorder}`}
           data-color="green"
           onClick={handlePlayerTurn}
         ></button>
         <button
-          className={`absolute ${gameStatus === 'playerTurn' && 'hover:bg-[color:hsl(0,100,50)]'} ${currentColor === 'red' ? 'bg-[color:hsl(0,100,50)]' : 'bg-[color:hsl(0,30,50)]'} rounded-tr-full ${circleSize[size].colorButton} ${circleSize[size].topBorder} ${circleSize[size].rightBorder}`}
+          className={`absolute ${gameStatus === 'playerTurn' && 'hover:bg-[color:hsl(0,100,50)]'} ${currentColor === 'red' || highlightColor === 'red' ? 'bg-[color:hsl(0,100,50)]' : 'bg-[color:hsl(0,30,50)]'} rounded-tr-full ${circleSize[size].colorButton} ${circleSize[size].topBorder} ${circleSize[size].rightBorder}`}
           data-color="red"
           onClick={handlePlayerTurn}
         ></button>
         <button
-          className={`absolute ${gameStatus === 'playerTurn' && 'hover:bg-[color:hsl(60,100,50)]'} ${currentColor === 'yellow' ? 'bg-[color:hsl(60,100,50)]' : 'bg-[color:hsl(60,30,50)]'} rounded-bl-full ${circleSize[size].colorButton} ${circleSize[size].bottomBorder} ${circleSize[size].leftBorder}`}
+          className={`absolute ${gameStatus === 'playerTurn' && 'hover:bg-[color:hsl(60,100,50)]'} ${currentColor === 'yellow' || highlightColor === 'yellow' ? 'bg-[color:hsl(60,100,50)]' : 'bg-[color:hsl(60,30,50)]'} rounded-bl-full ${circleSize[size].colorButton} ${circleSize[size].bottomBorder} ${circleSize[size].leftBorder}`}
           data-color="yellow"
           onClick={handlePlayerTurn}
         ></button>
         <button
-          className={`absolute rounded-br-full ${gameStatus === 'playerTurn' && 'hover:bg-[color:hsl(200,100,50)]'}  ${currentColor === 'blue' ? 'bg-[color:hsl(200,100,50)]' : 'bg-[color:hsl(200,30,50)]'} ${circleSize[size].colorButton} ${circleSize[size].bottomBorder} ${circleSize[size].rightBorder}`}
+          className={`absolute rounded-br-full ${gameStatus === 'playerTurn' && 'hover:bg-[color:hsl(200,100,50)]'}  ${currentColor === 'blue' || highlightColor === 'blue' ? 'bg-[color:hsl(200,100,50)]' : 'bg-[color:hsl(200,30,50)]'} ${circleSize[size].colorButton} ${circleSize[size].bottomBorder} ${circleSize[size].rightBorder}`}
           data-color="blue"
           onClick={handlePlayerTurn}
         ></button>
         <div className={`absolute bg-gray-600 rounded-full ${circleSize[size].centerCircle}`}></div>
-        {gameStatus}
       </div>
     )
   }
@@ -215,9 +220,12 @@ const App: React.FC = () => {
           <span className="font-semibold">{gameStatus === 'idle' ? 'NEW GAME' : 'NEXT LEVEL'}</span>
         </button>
       : <div className="py-2 mt-8 text-2xl font-semibold text-white">SCORE: {score}</div>}
-      <div className="flex absolute top-6 left-6 justify-center items-center bg-gray-600 rounded-lg w-[48px] h-[48px]">
+      <button
+        className="flex absolute top-6 left-6 justify-center items-center bg-gray-600 rounded-lg w-[48px] h-[48px]"
+        onClick={handleShowGameRule}
+      >
         <img src={gameRuleIcon} alt="show game rule" width={24} height={24} />
-      </div>
+      </button>
       <div className="flex absolute top-6 right-6 justify-center items-center bg-gray-600 rounded-lg w-[48px] h-[48px]">
         <img src={soundOnIcon} alt="turn off sound" width={24} height={24} />
       </div>
@@ -250,6 +258,25 @@ const App: React.FC = () => {
               <span className="font-semibold">TRY AGAIN</span>
             </button>
           </div>
+        </div>
+      </Modal>
+      <Modal isOpen={showGameRule} contentLabel="GameRule" style={gameOverModalStyles} ariaHideApp={false}>
+        <div className="flex flex-col gap-1 justify-center items-center w-full h-full">
+          <div className="text-3xl font-bold text-white">GAME RULES</div>
+          <div className="text-white text-md">Repeat the upcoming sequences of signals.</div>
+          <div className="flex gap-4 justify-center items-center mt-4">
+            <Circle size={'small'} highlightColor={'green'} />
+            <Circle size={'small'} highlightColor={'red'} />
+            <Circle size={'small'} highlightColor={'blue'} />
+            <Circle size={'small'} highlightColor={'yellow'} />
+          </div>
+          <button
+            type="button"
+            className="py-2 mt-8 w-32 bg-sky-400 rounded-lg w-128 shadow-[0_5px_0_#0ea5e9] hover:bg-sky-300"
+            onClick={handleShowGameRule}
+          >
+            <span className="font-semibold">OK</span>
+          </button>
         </div>
       </Modal>
     </div>
