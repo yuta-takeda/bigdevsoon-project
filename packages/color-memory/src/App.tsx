@@ -125,6 +125,7 @@ const App: React.FC = () => {
       setGameStatus('levelClear')
     } else {
       console.log('wrong')
+      setBestScore((prevBestScore) => Math.max(prevBestScore, score))
       setGameStatus('gameOver')
     }
   }
@@ -197,6 +198,11 @@ const App: React.FC = () => {
       <div className="flex absolute top-6 right-6 justify-center items-center bg-gray-600 rounded-lg w-[48px] h-[48px]">
         <img src={soundOnIcon} alt="turn off sound" width={24} height={24} />
       </div>
+      {bestScore > 0 && (
+        <div className="flex absolute bottom-6 left-6 items-center justify-left">
+          <span className="text-xl font-bold text-white">BEST SCORE: {bestScore}</span>
+        </div>
+      )}
       <Modal isOpen={gameStatus === 'countdown'} contentLabel="Countdown" style={modalStyles} ariaHideApp={false}>
         <div className="flex justify-center items-center w-full h-full">
           <div className="text-5xl font-bold text-white h-128">{countDownTime === 0 ? 'START' : countDownTime}</div>
