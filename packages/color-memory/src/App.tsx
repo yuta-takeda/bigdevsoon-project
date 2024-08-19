@@ -25,6 +25,24 @@ const modalStyles = {
   },
 }
 
+const gameOverModalStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    transform: 'translate(-50%, -50%)',
+    width: '600px',
+    height: '25%',
+    backgroundColor: '#374151', // gray-700
+    border: 'none',
+    overflow: 'hidden',
+  },
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0)',
+  },
+}
+
 const App: React.FC = () => {
   const [score, setScore] = React.useState(0)
   const [bestScore, setBestScore] = React.useState(0)
@@ -52,6 +70,11 @@ const App: React.FC = () => {
         return prevCount - 1
       })
     }, 1000)
+  }
+
+  const retryGame = () => {
+    setLevel(0)
+    prepareGame()
   }
 
   const startCpuTurn = () => {
@@ -104,6 +127,14 @@ const App: React.FC = () => {
       console.log('wrong')
       setGameStatus('gameOver')
     }
+  }
+
+  const quitGame = () => {
+    setGameStatus('idle')
+    setScore(0)
+    setLevel(0)
+    setColorSequence([])
+    setCurrentColor(null)
   }
 
   React.useEffect(() => {
@@ -171,6 +202,27 @@ const App: React.FC = () => {
       <Modal isOpen={gameStatus === 'countdown'} contentLabel="Countdown" style={modalStyles}>
         <div className="flex justify-center items-center w-full h-full">
           <div className="text-5xl font-bold text-white h-128">{countDownTime === 0 ? 'START' : countDownTime}</div>
+        </div>
+      </Modal>
+      <Modal isOpen={gameStatus === 'gameOver'} contentLabel="GameOver" style={gameOverModalStyles}>
+        <div className="flex flex-col justify-center items-center w-full h-full">
+          <div className="text-5xl font-bold text-white">GAME OVER</div>
+          <div className="flex gap-8">
+            <button
+              type="button"
+              className="py-2 mt-8 w-32 bg-gray-400 rounded-lg w-128 shadow-[0_5px_0_#6b7280] hover:bg-gray-300"
+              onClick={quitGame}
+            >
+              <span className="font-semibold">QUIT</span>
+            </button>
+            <button
+              type="button"
+              className="py-2 mt-8 w-32 bg-orange-400 rounded-lg w-128 shadow-[0_5px_0_rgb(217,119,6)] hover:bg-orange-300"
+              onClick={retryGame}
+            >
+              <span className="font-semibold">TRY AGAIN</span>
+            </button>
+          </div>
         </div>
       </Modal>
     </>
