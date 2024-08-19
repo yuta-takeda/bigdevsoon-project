@@ -4,7 +4,7 @@ import Modal from 'react-modal'
 import gameRuleIcon from './assets/icons/game-rules-icon.svg'
 import soundOnIcon from './assets/icons/sound-on-icon.svg'
 
-type GameStatus = 'idle' | 'countdown' | 'cpuTurn' | 'playerTurn' | 'gameOver'
+type GameStatus = 'idle' | 'countdown' | 'cpuTurn' | 'playerTurn' | 'levelClear' | 'gameOver'
 type Colors = 'green' | 'red' | 'yellow' | 'blue'
 
 const modalStyles = {
@@ -35,8 +35,7 @@ const App: React.FC = () => {
   const [countDownTime, setCountDownTime] = React.useState(3)
   const intervalRef = React.useRef<NodeJS.Timer | undefined>(undefined)
 
-  const startCountDown = () => {
-    setScore(0)
+  const prepareGame = () => {
     setColorSequence([])
     setGameStatus('countdown')
     setCountDownTime(3)
@@ -56,7 +55,6 @@ const App: React.FC = () => {
   }
 
   const startCpuTurn = () => {
-    console.log(level)
     const newColorSequence = [...Array(level)].map(() => {
       const randomIndex = Math.floor(Math.random() * 4)
       console.log(['green', 'red', 'yellow', 'blue'][randomIndex] as Colors)
@@ -73,6 +71,7 @@ const App: React.FC = () => {
 
     intervalRef.current = setInterval(() => {
       if (colorCount > newColorSequence.length) {
+        clearInterval(intervalRef.current)
         setGameStatus('playerTurn')
       } else {
         setCurrentColor(null)
@@ -85,13 +84,27 @@ const App: React.FC = () => {
     }, 2000)
   }
 
-  React.useEffect(() => {
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current)
-      }
+  const handlePlayerTurn = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (gameStatus !== 'playerTurn') {
+      return
     }
-  }, [])
+
+    const target = e.target as HTMLButtonElement
+    const selectedColor = target.dataset.color as Colors
+
+    if (selectedColor === colorSequence[0] && colorSequence.length > 1) {
+      console.log('correct')
+      setColorSequence((prevColorSequence) => prevColorSequence.slice(1))
+      setScore((prevScore) => prevScore + 1)
+    } else if (selectedColor === colorSequence[0]) {
+      console.log('clear')
+      setScore((prevScore) => prevScore + 1)
+      setGameStatus('levelClear')
+    } else {
+      console.log('wrong')
+      setGameStatus('gameOver')
+    }
+  }
 
   React.useEffect(() => {
     if (level > 0) {
@@ -102,6 +115,7 @@ const App: React.FC = () => {
   const title =
     gameStatus === 'cpuTurn' ? 'WATCH CLOSELY'
     : gameStatus === 'playerTurn' ? 'YOUR TURN'
+    : gameStatus === 'levelClear' ? `LEVEL ${level} CLEAR!`
     : 'COLOR MEMORY'
 
   const Circle: React.FC = () => {
@@ -109,17 +123,26 @@ const App: React.FC = () => {
       <div className="relative bg-gray-600 rounded-full w-[500px] h-[500px]">
         <button
           className={`absolute ${gameStatus === 'playerTurn' && 'hover:bg-[color:hsl(120,100,50)]'} ${currentColor === 'green' ? 'bg-[color:hsl(120,100,50)]' : 'bg-[color:hsl(120,30,50)]'} rounded-tl-full w-[205px] h-[205px] top-[30px] left-[30px]`}
+          data-color="green"
+          onClick={handlePlayerTurn}
         ></button>
         <button
           className={`absolute ${gameStatus === 'playerTurn' && 'hover:bg-[color:hsl(0,100,50)]'} ${currentColor === 'red' ? 'bg-[color:hsl(0,100,50)]' : 'bg-[color:hsl(0,30,50)]'} rounded-tr-full w-[205px] h-[205px] top-[30px] right-[30px]`}
+          data-color="red"
+          onClick={handlePlayerTurn}
         ></button>
         <button
           className={`absolute ${gameStatus === 'playerTurn' && 'hover:bg-[color:hsl(60,100,50)]'} ${currentColor === 'yellow' ? 'bg-[color:hsl(60,100,50)]' : 'bg-[color:hsl(60,30,50)]'} rounded-bl-full w-[205px] h-[205px] bottom-[30px] left-[30px]`}
+          data-color="yellow"
+          onClick={handlePlayerTurn}
         ></button>
         <button
           className={`absolute rounded-br-full ${gameStatus === 'playerTurn' && 'hover:bg-[color:hsl(200,100,50)]'}  ${currentColor === 'blue' ? 'bg-[color:hsl(200,100,50)]' : 'bg-[color:hsl(200,30,50)]'} w-[205px] h-[205px] bottom-[30px] right-[30px]`}
+          data-color="blue"
+          onClick={handlePlayerTurn}
         ></button>
         <div className="absolute bg-gray-600 rounded-full w-[200px] h-[200px] top-[150px] left-[150px]"></div>
+        {gameStatus}
       </div>
     )
   }
@@ -129,15 +152,15 @@ const App: React.FC = () => {
       <div className="flex relative flex-col justify-center items-center w-screen h-screen bg-gray-800">
         <h1 className="mb-8 text-4xl font-semibold text-white">{title}</h1>
         <Circle />
-        {gameStatus === 'idle' && (
+        {gameStatus === 'idle' || gameStatus === 'levelClear' ?
           <button
             type="button"
-            className="py-2 mt-8 bg-orange-400 rounded-lg w-[500px] shadow-[0_5px_0_rgb(217,119,6)] hover:translate-y-1 hover:bg-orange-300"
-            onClick={startCountDown}
+            className="py-2 mt-8 bg-orange-400 rounded-lg w-[500px] shadow-[0_5px_0_rgb(217,119,6)] hover:bg-orange-300"
+            onClick={prepareGame}
           >
-            <span className="font-semibold">NEW GAME</span>
+            <span className="font-semibold">{gameStatus === 'idle' ? 'NEW GAME' : 'NEXT LEVEL'}</span>
           </button>
-        )}
+        : <div className="py-2 mt-8 text-2xl font-semibold text-white">SCORE: {score}</div>}
         <div className="flex absolute top-6 left-6 justify-center items-center bg-gray-600 rounded-lg w-[48px] h-[48px]">
           <img src={gameRuleIcon} alt="show game rule" width={24} height={24} />
         </div>
