@@ -251,12 +251,12 @@ const App: React.FC = () => {
       {gameStatus === 'idle' || gameStatus === 'levelClear' ?
         <button
           type="button"
-          className="py-2 mt-8 bg-orange-400 rounded-lg w-[400px] shadow-[0_5px_0_rgb(217,119,6)] hover:bg-orange-300"
+          className="py-2 mt-8 bg-orange-400 rounded-lg w-[400px] shadow-[0_5px_0_rgb(217,119,6)] hover:bg-orange-300 h-10"
           onClick={prepareGame}
         >
           <span className="font-semibold">{gameStatus === 'idle' ? 'NEW GAME' : 'NEXT LEVEL'}</span>
         </button>
-      : <div className="py-2 mt-8 text-2xl font-semibold text-white">SCORE: {score}</div>}
+      : <div className="py-2 mt-8 h-10 text-2xl font-semibold text-white">SCORE: {score}</div>}
       <button
         className="flex absolute top-6 left-6 justify-center items-center bg-gray-600 rounded-lg w-[48px] h-[48px]"
         onClick={handleShowGameRule}
