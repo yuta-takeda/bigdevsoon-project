@@ -65,6 +65,19 @@ const App: React.FC = () => {
   const rightAnswer = new Audio(rightAnswerSound)
   const levelClear = new Audio(levelClearSound)
 
+  React.useEffect(() => {
+    if (level > 0) {
+      startCpuTurn()
+    }
+  }, [level])
+
+  React.useEffect(() => {
+    const bestScore = localStorage.getItem('ColorMemory:bestScore')
+    if (bestScore) {
+      setBestScore(parseInt(bestScore))
+    }
+  }, [])
+
   const prepareGame = () => {
     setColorSequence([])
     setGameStatus('countdown')
@@ -138,7 +151,9 @@ const App: React.FC = () => {
     } else {
       console.log('wrong')
       playSound(wrongAnswer)
-      setBestScore((prevBestScore) => Math.max(prevBestScore, score))
+      const newBestScore = Math.max(score, bestScore)
+      setBestScore(newBestScore)
+      localStorage.setItem('ColorMemory:bestScore', newBestScore.toString())
       setGameStatus('gameOver')
     }
   }
@@ -166,12 +181,6 @@ const App: React.FC = () => {
   const handleSoundOn = () => {
     setSoundOn((prevStatus) => !prevStatus)
   }
-
-  React.useEffect(() => {
-    if (level > 0) {
-      startCpuTurn()
-    }
-  }, [level])
 
   const title =
     gameStatus === 'cpuTurn' ? 'WATCH CLOSELY'
