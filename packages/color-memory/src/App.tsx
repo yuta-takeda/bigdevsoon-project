@@ -198,13 +198,13 @@ const App: React.FC = () => {
         rightBorder: 'right-[10px]',
       },
       large: {
-        circle: 'w-[500px] h-[500px]',
-        colorButton: 'w-[205px] h-[205px]',
-        centerCircle: 'w-[200px] h-[200px] top-[150px] left-[150px]',
-        topBorder: 'top-[30px]',
-        bottomBorder: 'bottom-[30px]',
-        leftBorder: 'left-[30px]',
-        rightBorder: 'right-[30px]',
+        circle: 'w-[400px] h-[400px]',
+        colorButton: 'w-[170px] h-[170px]',
+        centerCircle: 'w-[150px] h-[150px] top-[125px] left-[125px]',
+        topBorder: 'top-[20px]',
+        bottomBorder: 'bottom-[20px]',
+        leftBorder: 'left-[20px]',
+        rightBorder: 'right-[20px]',
       },
     }
 
@@ -242,7 +242,7 @@ const App: React.FC = () => {
       {gameStatus === 'idle' || gameStatus === 'levelClear' ?
         <button
           type="button"
-          className="py-2 mt-8 bg-orange-400 rounded-lg w-[500px] shadow-[0_5px_0_rgb(217,119,6)] hover:bg-orange-300"
+          className="py-2 mt-8 bg-orange-400 rounded-lg w-[400px] shadow-[0_5px_0_rgb(217,119,6)] hover:bg-orange-300"
           onClick={prepareGame}
         >
           <span className="font-semibold">{gameStatus === 'idle' ? 'NEW GAME' : 'NEXT LEVEL'}</span>
@@ -263,7 +263,7 @@ const App: React.FC = () => {
         : <img src={soundOffIcon} alt="turn on sound" width={24} height={24} />}
       </button>
       {bestScore > 0 && (
-        <div className="flex absolute bottom-6 left-6 items-center justify-left">
+        <div className="flex absolute bottom-6 items-center sm:left-6 justify-left">
           <span className="text-xl font-bold text-white">BEST SCORE: {bestScore}</span>
         </div>
       )}
