@@ -31,21 +31,14 @@ const modalStyles = {
   },
 }
 
-const gameOverModalStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    transform: 'translate(-50%, -50%)',
-    width: '600px',
-    height: '35%',
-    backgroundColor: '#374151', // gray-700
-    border: 'none',
-    overflow: 'hidden',
-  },
-  overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0)',
+const compactModalStyles = {
+  ...modalStyles,
+  ...{
+    content: {
+      ...modalStyles.content,
+      width: '500px',
+      height: '35%',
+    },
   },
 }
 
@@ -281,7 +274,7 @@ const App: React.FC = () => {
           <div className="text-5xl font-bold text-white h-128">{countDownTime === 0 ? 'START' : countDownTime}</div>
         </div>
       </Modal>
-      <Modal isOpen={gameStatus === 'gameOver'} contentLabel="GameOver" style={gameOverModalStyles} ariaHideApp={false}>
+      <Modal isOpen={gameStatus === 'gameOver'} contentLabel="GameOver" style={compactModalStyles} ariaHideApp={false}>
         <div className="flex flex-col justify-center items-center w-full h-full">
           <div className="text-5xl font-bold text-white">GAME OVER</div>
           <div className="flex gap-8">
@@ -302,11 +295,11 @@ const App: React.FC = () => {
           </div>
         </div>
       </Modal>
-      <Modal isOpen={showGameRule} contentLabel="GameRule" style={gameOverModalStyles} ariaHideApp={false}>
+      <Modal isOpen={showGameRule} contentLabel="GameRule" style={compactModalStyles} ariaHideApp={false}>
         <div className="flex flex-col gap-1 justify-center items-center w-full h-full">
           <div className="text-3xl font-bold text-white">GAME RULES</div>
           <div className="text-white text-md">Repeat the upcoming sequences of signals.</div>
-          <div className="flex gap-4 justify-center items-center mt-4">
+          <div className="flex gap-3 justify-center items-center mt-4">
             <Circle size={'small'} highlightColor={'green'} />
             <Circle size={'small'} highlightColor={'red'} />
             <Circle size={'small'} highlightColor={'blue'} />
