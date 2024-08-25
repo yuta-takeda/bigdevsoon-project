@@ -27,6 +27,7 @@ export const Container: React.FC = () => {
     if (level > 0) {
       startCpuTurn()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [level])
 
   React.useEffect(() => {
