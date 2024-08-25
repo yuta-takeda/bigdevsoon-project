@@ -5,7 +5,7 @@ interface CircleProps {
   size: 'small' | 'large'
   gameStatus: GameStatus
   currentColor: Colors | null
-  handlePlayerTurn: (e: React.MouseEvent<HTMLButtonElement>) => void
+  handlePlayerTurn: (_: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 export const Circle: React.FC<CircleProps> = (props) => {

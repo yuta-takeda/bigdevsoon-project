@@ -47,9 +47,9 @@ interface Props {
   soundOn: boolean
   handleShowGameRule: () => void
   handleSoundOn: () => void
-  handlePlayerTurn: (e: React.MouseEvent<HTMLButtonElement>) => void
+  handlePlayerTurn: (_: React.MouseEvent<HTMLButtonElement>) => void
   prepareGame: () => void
-  quitGame: (e: React.MouseEvent<HTMLButtonElement>, retry: boolean) => void
+  quitGame: (_: React.MouseEvent<HTMLButtonElement>, __: boolean) => void
 }
 
 export const Component: React.FC<Props> = (props) => {

@@ -27,7 +27,6 @@ export const Container: React.FC = () => {
     if (level > 0) {
       startCpuTurn()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [level])
 
   React.useEffect(() => {
@@ -60,6 +59,7 @@ export const Container: React.FC = () => {
     const newColorSequence = [...Array(level)].map(() => {
       const randomIndex = Math.floor(Math.random() * 4)
       console.log(['green', 'red', 'yellow', 'blue'][randomIndex] as Colors)
+
       return ['green', 'red', 'yellow', 'blue'][randomIndex] as Colors
     })
 

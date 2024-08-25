@@ -2,11 +2,12 @@
   "name": "bigdevsoon",
   "version": "1.0.0",
   "private": true,
-  "workspaces": ["packages/*"],
+  "workspaces": ["packages/*", "packages/@dev/*"],
   "scripts": {},
   "dependencies": {},
   "devDependencies": {
     "prettier": "3.3.3",
-    "prettier-plugin-organize-imports": "4.0.0"
+    "prettier-plugin-organize-imports": "4.0.0",
+    "@dev/eslint-config": "*"
   }
 }
