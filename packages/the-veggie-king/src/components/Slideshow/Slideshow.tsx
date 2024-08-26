@@ -15,7 +15,6 @@ export const Slideshow: React.FC<Props> = (props) => {
     }, intervalMs)
 
     return () => clearInterval(interval)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
