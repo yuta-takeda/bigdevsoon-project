@@ -5,7 +5,7 @@ import xIcon from '../../assets/x.svg'
 
 interface Props {
   userIcon: 'X' | 'O'
-  handleSetUserIcon: (event: React.ChangeEvent<HTMLInputElement>) => void
+  handleSetUserIcon: (_: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 export const Component: React.FC<Props> = (props) => {

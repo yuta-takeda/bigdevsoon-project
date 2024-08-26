@@ -40,7 +40,6 @@ export const Container: React.FC<Props> = (props = {}) => {
         setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X')
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [yourCount, cpuCount])
 
   useEffect(() => {
@@ -49,7 +48,6 @@ export const Container: React.FC<Props> = (props = {}) => {
         cpuTurn()
       }, 1000)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPlayer])
 
   const handlePlace = (event: React.MouseEvent) => {

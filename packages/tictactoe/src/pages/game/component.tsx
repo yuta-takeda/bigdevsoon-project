@@ -10,7 +10,7 @@ interface Props {
   currentPlayer: Icon
   yourCount: number
   cpuCount: number
-  handlePlace: (event: React.MouseEvent) => void
+  handlePlace: (_: React.MouseEvent) => void
   field: FieldIcon[][]
   isGameOver: boolean
   isDraw: boolean
