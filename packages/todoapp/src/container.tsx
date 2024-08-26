@@ -21,6 +21,7 @@ export const TodoContainer: React.FC = () => {
     const value = input.value
     if (value === '') {
       alert('Please enter a value')
+
       return
     }
     const lastId = Math.max(Math.max(...todos.map((todo) => todo.id)), 1)
@@ -44,6 +45,7 @@ export const TodoContainer: React.FC = () => {
       if (todo.id === id) {
         todo.completed = !todo.completed
       }
+
       return todo
     })
     const sortedTodos = sortTodo(newTodos)

@@ -10,13 +10,13 @@ interface TodoProps {
   todos: Todo[]
   isDarkMode: boolean
   toggleTheme: () => void
-  setShowButton: (value: boolean) => void
+  setShowButton: (_: boolean) => void
   showButton: boolean
   addTodo: () => void
-  showDeleteButton: (e: MouseEvent) => void
-  hideDeleteButton: (e: MouseEvent) => void
-  toggleCompleted: (id: number) => void
-  deleteTodo: (e: MouseEvent, id: number) => void
+  showDeleteButton: (_: MouseEvent) => void
+  hideDeleteButton: (_: MouseEvent) => void
+  toggleCompleted: (_: number) => void
+  deleteTodo: (_: MouseEvent, __: number) => void
 }
 
 export const TodoComponent: React.FC<TodoProps> = ({
