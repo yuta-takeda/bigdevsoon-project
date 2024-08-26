@@ -11,14 +11,14 @@ interface Props {
   setRandomFaceParts: () => void
   downloadImage: () => void
   genreLabels: string[]
-  handleCurrentSelectedType: (e: React.MouseEvent<HTMLElement>) => void
+  handleCurrentSelectedType: (_: React.MouseEvent<HTMLElement>) => void
   currentSelectedType: SelectableFaceParts
   backgroundColors: string[]
   currentFaceParts: CurrentFaceParts
-  setFaceParts: (e: React.MouseEvent<HTMLElement>) => void
+  setFaceParts: (_: React.MouseEvent<HTMLElement>) => void
   faceParts: FaceParts
   downloadSuccess: boolean
-  handleDownloadLabel: (e: React.MouseEvent<HTMLElement>) => void
+  handleDownloadLabel: (_: React.MouseEvent<HTMLElement>) => void
 }
 
 interface Parts {
@@ -28,7 +28,7 @@ interface Parts {
 }
 
 type FaceParts = {
-  [key in Exclude<SelectableFaceParts, 'background'>]: Parts[]
+  [_ in Exclude<SelectableFaceParts, 'background'>]: Parts[]
 }
 
 export const Component: React.FC<Props> = (props) => {

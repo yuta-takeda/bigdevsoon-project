@@ -36,20 +36,23 @@ export const Container: React.FC = () => {
 
   React.useEffect(() => {
     drawFace()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentFaceParts])
 
   const setFaceParts = (e: React.MouseEvent<HTMLElement>) => {
     const target = e.target as HTMLImageElement
     const facetype = target.dataset.facetype
     const imgid = target.dataset.imgid
-    if (!facetype || !imgid) return
+    if (!facetype || !imgid) {
+      return
+    }
 
     const canvasSrc =
       currentSelectedType === 'background' ? imgid : (
         faceParts[currentSelectedType].find((parts) => parts.name === imgid)?.canvasSrc
       )
-    if (!canvasSrc) return
+    if (!canvasSrc) {
+      return
+    }
 
     const newFaceParts = { ...currentFaceParts, [facetype]: canvasSrc }
     localStorage.setItem(localStorageKey, JSON.stringify(newFaceParts))
@@ -79,14 +82,18 @@ export const Container: React.FC = () => {
   const handleCurrentSelectedType = (e: React.MouseEvent<HTMLElement>) => {
     const target = e.target as HTMLButtonElement
     const facetype = target.dataset.facetype
-    if (!facetype) return
+    if (!facetype) {
+      return
+    }
 
     setCurrentSelectedType(facetype as SelectableFaceParts)
   }
 
   const downloadImage = () => {
     const canvas = document.querySelector('canvas#canvas') as HTMLCanvasElement
-    if (!canvas) return
+    if (!canvas) {
+      return
+    }
 
     const link = document.createElement('a')
     link.href = canvas.toDataURL('image/png')
@@ -105,10 +112,14 @@ export const Container: React.FC = () => {
 
   const drawFace = () => {
     const canvas = document.querySelector('canvas#canvas') as HTMLCanvasElement
-    if (!canvas) return
+    if (!canvas) {
+      return
+    }
 
     const ctx = canvas.getContext('2d')
-    if (!ctx) return
+    if (!ctx) {
+      return
+    }
 
     let loadedImages = 0
     const imageObjects = [] as HTMLImageElement[]
@@ -119,12 +130,14 @@ export const Container: React.FC = () => {
           canvas.style.backgroundColor = currentFaceParts.background
         }
         loadedImages++
+
         return
       }
 
       const canvasSrc = currentFaceParts[partType as (typeof facePartsOrder)[number]]
       if (!canvasSrc) {
         loadedImages++
+
         return
       }
 
