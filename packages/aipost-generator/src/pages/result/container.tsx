@@ -16,6 +16,7 @@ export const Container: React.FC = () => {
         setGeneratedMessage(
           'env REACT_APP_OPENAI_API_KEY がセットされていないのデモメッセージを表示しています。REACT_APP_OPENAI_API_KEY をセットして試してください🙇‍'
         )
+
         return
       }
 
@@ -38,11 +39,10 @@ export const Container: React.FC = () => {
           messages: [{ role: 'user', content: postMessage }],
           temperature: 0.7,
         },
-        { headers: headers }
+        { headers }
       )
       setGeneratedMessage(response.data.choices[0].message.content)
     })()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [generatedMessage])
 
   const handleRegenerate = () => {

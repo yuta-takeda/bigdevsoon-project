@@ -30,13 +30,13 @@ const toneOfVoices = ['Polite', 'Funny', 'Friendly', 'Informal', 'Serious', 'Opt
 const postStyles = ['Work', 'Opinion', 'Case study', 'Story', 'Tutorial']
 
 interface Props {
-  setSelectedPlatform: (platform: string) => void
+  setSelectedPlatform: (_: string) => void
   selectedPlatform: string
-  setMessage: (message: string) => void
+  setMessage: (_: string) => void
   message: string
-  setSelectedToneOfVoice: (tone: string) => void
+  setSelectedToneOfVoice: (_: string) => void
   selectedToneOfVoice: string
-  setSelectedPostStyle: (style: string) => void
+  setSelectedPostStyle: (_: string) => void
   selectedPostStyle: string
   isPostable: () => boolean
 }
