@@ -3,7 +3,7 @@ import linkedinIcon from './assets/icons/linkedin-icon.svg'
 import twitterIcon from './assets/icons/twitter-icon.svg'
 import userPhoto from './assets/images/user-photo.jpg'
 
-function App() {
+const App = () => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-green-100">
       <div className="overflow-hidden mx-auto bg-white rounded-xl shadow-md">
